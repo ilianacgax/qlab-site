@@ -1,0 +1,31 @@
+registro	fecha	turno	linea	proveedor	tipo_defecto
+1	11-ago	Matutino	LÃ­nea 1	Proveedor A	Rebaba
+2	11-ago	Vespertino	LÃ­nea 2	Proveedor B	Fuera de dimensiÃ³n
+3	11-ago	Nocturno	LÃ­nea 1	Proveedor B	Fuera de dimensiÃ³n
+4	12-ago	Matutino	LÃ­nea 3	Proveedor A	Ensamble incompleto
+5	12-ago	Vespertino	LÃ­nea 1	Proveedor C	Color fuera de especificaciÃ³n
+6	12-ago	Nocturno	LÃ­nea 2	Proveedor B	Fuera de dimensiÃ³n
+7	13-ago	Matutino	LÃ­nea 2	Proveedor A	Rebaba
+8	13-ago	Nocturno	LÃ­nea 3	Proveedor B	Fuera de dimensiÃ³n
+9	13-ago	Vespertino	LÃ­nea 1	Proveedor A	Empaque daÃ±ado
+10	14-ago	Nocturno	LÃ­nea 1	Proveedor B	Fuera de dimensiÃ³n
+11	14-ago	Matutino	LÃ­nea 2	Proveedor C	Rebaba
+12	14-ago	Vespertino	LÃ­nea 3	Proveedor A	Ensamble incompleto
+13	15-ago	Nocturno	LÃ­nea 2	Proveedor B	Fuera de dimensiÃ³n
+14	15-ago	Matutino	LÃ­nea 1	Proveedor A	Rebaba
+15	15-ago	Vespertino	LÃ­nea 1	Proveedor C	Color fuera de especificaciÃ³n
+16	18-ago	Nocturno	LÃ­nea 3	Proveedor B	Fuera de dimensiÃ³n
+17	18-ago	Matutino	LÃ­nea 2	Proveedor A	Ensamble incompleto
+18	18-ago	Vespertino	LÃ­nea 1	Proveedor B	Fuera de dimensiÃ³n
+19	19-ago	Nocturno	LÃ­nea 1	Proveedor B	Fuera de dimensiÃ³n
+20	19-ago	Matutino	LÃ­nea 3	Proveedor A	Rebaba
+21	19-ago	Vespertino	LÃ­nea 2	Proveedor C	Empaque daÃ±ado
+22	20-ago	Nocturno	LÃ­nea 2	Proveedor B	Fuera de dimensiÃ³n
+23	20-ago	Matutino	LÃ­nea 1	Proveedor A	Rebaba
+24	20-ago	Vespertino	LÃ­nea 3	Proveedor A	Ensamble incompleto
+25	21-ago	Nocturno	LÃ­nea 1	Proveedor B	Fuera de dimensiÃ³n
+26	21-ago	Matutino	LÃ­nea 2	Proveedor C	Color fuera de especificaciÃ³n
+27	21-ago	Vespertino	LÃ­nea 1	Proveedor A	Rebaba
+28	22-ago	Nocturno	LÃ­nea 3	Proveedor B	Fuera de dimensiÃ³n
+29	22-ago	Matutino	LÃ­nea 1	Proveedor A	Empaque daÃ±ado
+30	22-ago	Vespertino	LÃ­nea 2	Proveedor B	Fuera de dimensiÃ³n
