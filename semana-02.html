@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 2 — Q-LAB 360</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <h1 class="masthead-title"><small>Sistemas y Aseguramiento de la Calidad</small><a href="index.html" style="color:inherit;text-decoration:none;">Q-LAB 360</a></h1>
+    <div class="masthead-meta">Semana 2 de 16<br>Evolución de la calidad</div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Semanas del curso">
+  <div class="rail-inner">
+    <a href="semana-01.html" class="tag is-open"><b>01</b> Sistema y calidad</a>
+    <a href="semana-02.html" class="tag is-current"><b>02</b> Evolución</a>
+    <a href="semana-03.html" class="tag is-open"><b>03</b> Verificación</a>
+    <span class="tag is-locked"><b>04</b> Pareto</span>
+    <span class="tag is-locked"><b>05</b> Parcial 1</span>
+    <span class="tag is-locked"><b>06</b> Causa raíz</span>
+    <span class="tag is-locked"><b>07</b> Control</span>
+    <span class="tag is-locked"><b>08</b> Mapeo</span>
+    <span class="tag is-locked"><b>09</b> Estrategia</span>
+    <span class="tag is-locked"><b>10</b> Parcial 2</span>
+    <span class="tag is-locked"><b>11</b> ISO 9001</span>
+    <span class="tag is-locked"><b>12</b> Normas</span>
+    <span class="tag is-locked"><b>13</b> NOM</span>
+    <span class="tag is-locked"><b>14</b> Riesgos</span>
+    <span class="tag is-locked"><b>15</b> Parcial 3</span>
+    <span class="tag is-locked"><b>16</b> Cierre</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Línea del tiempo interactiva</div>
+    <h1 class="h-lg">¿Cómo hubiera<br>respondido la empresa?</h1>
+    <p class="lede">Q-LAB "viaja en el tiempo": el mismo problema — piezas fuera de dimensión que
+    llegan al cliente — se presenta en 6 momentos distintos de la evolución de la calidad. En cada
+    parada, decide cómo habría respondido la empresa <strong>con las herramientas de esa época</strong>,
+    no con lo que ya sabes hoy.</p>
+    <span class="stamp blue">6 paradas · elige una opción en cada una</span>
+  </section>
+
+  <div class="progress" role="progressbar" aria-label="Progreso de la línea del tiempo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress-fill"></div>
+  </div>
+
+  <section class="block" style="border-top:none;padding-top:0;">
+    <div class="stations">
+
+      <!-- Parada 1 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">1</span><div><h3 class="h-sm" style="margin:0;">La era de la Inspección</h3><span class="station-era">Finales s. XIX – 1920s</span></div></div>
+        <p class="ctx">La calidad se garantiza revisando el producto terminado y separando lo bueno de lo malo. Q-LAB: llegan piezas fuera de dimensión al cliente porque la inspección final solo revisa una muestra pequeña al final de la línea. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Contratar más inspectores para revisar el 100&nbsp;% de las piezas al final de la línea.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Detener la línea para investigar estadísticamente por qué se producen piezas fuera de dimensión.</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Pedir a los operarios que "tengan más cuidado".</button>
+        </div>
+        <div class="outcome era" data-for="a">Es la respuesta típica de la época. Los defectos que llegan al cliente bajan, pero el costo de inspección se dispara y la causa del problema sigue intacta.</div>
+        <div class="outcome early" data-for="b">Buena idea… pero adelantada 20 años. Las herramientas estadísticas para hacer esto de forma sistemática todavía no existen.</div>
+        <div class="outcome behind" data-for="c">Sin datos ni método, la mejora depende de la buena voluntad de cada operario: inconsistente.</div>
+        <p class="learn">Aprendizaje: la inspección al 100&nbsp;% detecta, pero no previene.</p>
+      </div>
+
+      <!-- Parada 2 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">2</span><div><h3 class="h-sm" style="margin:0;">Control Estadístico de Procesos</h3><span class="station-era">1920s – 1940s</span></div></div>
+        <p class="ctx">Walter Shewhart introduce las cartas de control; su uso se masifica en la Segunda Guerra Mundial. Q-LAB: los defectos de dimensión no son aleatorios, hay un patrón según el turno de producción. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Usar cartas de control por turno para detectar cuándo el proceso se sale de control estadístico.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Certificar el sistema de gestión de calidad con una norma internacional.</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Seguir con inspección al 100&nbsp;% sin cambios.</button>
+        </div>
+        <div class="outcome era" data-for="a">Es el gran salto de esta época: nace la diferencia entre variación común (normal del proceso) y variación especial (una causa identificable).</div>
+        <div class="outcome early" data-for="b">Adelantada casi 60 años: ISO 9001 no existirá hasta 1987.</div>
+        <div class="outcome behind" data-for="c">Sigue siendo costoso y no previene nada nuevo.</div>
+        <p class="learn">Aprendizaje: el proceso, no solo el producto, empieza a monitorearse.</p>
+      </div>
+
+      <!-- Parada 3 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">3</span><div><h3 class="h-sm" style="margin:0;">Aseguramiento de la Calidad</h3><span class="station-era">1950s – 1970s</span></div></div>
+        <p class="ctx">Deming y Juran llevan sus ideas a Japón; nace el concepto de prevenir en lugar de solo detectar. Q-LAB quiere anticiparse al defecto, no solo encontrarlo después. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Diseñar procedimientos y estándares de proceso que prevengan el defecto antes de que ocurra.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Aumentar aún más la inspección final.</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Lanzar un programa de certificación ISO 9001 de inmediato.</button>
+        </div>
+        <div class="outcome era" data-for="a">Este es el corazón del aseguramiento de la calidad: prevenir en vez de reaccionar.</div>
+        <div class="outcome behind" data-for="b">Es un retroceso a la era de la inspección.</div>
+        <div class="outcome early" data-for="c">Todavía faltan más de 15 años para que exista esa norma.</div>
+        <p class="learn">Aprendizaje: el enfoque pasa de "detectar" a "prevenir".</p>
+      </div>
+
+      <!-- Parada 4 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">4</span><div><h3 class="h-sm" style="margin:0;">Calidad Total / TQM</h3><span class="station-era">1980s – 1990s</span></div></div>
+        <p class="ctx">Crosby populariza "cero defectos"; Ishikawa impulsa los círculos de calidad. Q-LAB: el problema de dimensión sigue apareciendo porque solo el área de calidad lo atiende. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Formar círculos de calidad con los propios operarios para resolver el problema desde la línea.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Delegar el problema únicamente al departamento de calidad.</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Certificar ISO 9001 como única estrategia, sin involucrar a los operarios.</button>
+        </div>
+        <div class="outcome era" data-for="a">Este es el espíritu de la calidad total: todos, no solo un departamento, son responsables de la calidad.</div>
+        <div class="outcome behind" data-for="b">Es un retroceso al paradigma de control aislado.</div>
+        <div class="outcome behind" data-for="c">ISO 9001 ya existe en esta época (desde 1987) y puede ayudar, pero certificar sin involucrar a las personas no resuelve la causa del problema.</div>
+        <p class="learn">Aprendizaje: la calidad se vuelve cultura organizacional, no solo función de un área.</p>
+      </div>
+
+      <!-- Parada 5 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">5</span><div><h3 class="h-sm" style="margin:0;">Sistemas de Gestión y Normalización</h3><span class="station-era">1990s – 2000s</span></div></div>
+        <p class="ctx">ISO 9001 se masifica; certificarse se vuelve requisito para competir globalmente. Clientes internacionales de Q-LAB exigen evidencia documentada de cómo se controla la calidad. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Implementar y certificar un sistema de gestión de calidad ISO 9001, con procesos documentados.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Confiar únicamente en la experiencia de los operarios, sin documentar nada.</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Implementar Six Sigma con cinturones certificados como única estrategia.</button>
+        </div>
+        <div class="outcome era" data-for="a">Es la respuesta natural de la época: la calidad se vuelve un sistema documentado y auditable.</div>
+        <div class="outcome behind" data-for="b">Sin documentación, ningún cliente internacional puede verificar el sistema.</div>
+        <div class="outcome behind" data-for="c">Six Sigma es una herramienta poderosa de esta misma época, pero funciona mejor como complemento del sistema de gestión, no como sustituto.</div>
+        <p class="learn">Aprendizaje: la calidad necesita evidencia documentada, no solo buenas intenciones.</p>
+      </div>
+
+      <!-- Parada 6 -->
+      <div class="station">
+        <div class="station-head"><span class="station-idx">6</span><div><h3 class="h-sm" style="margin:0;">Calidad 4.0 / mejora digital</h3><span class="station-era">Actualidad</span></div></div>
+        <p class="ctx">Sensores, datos en tiempo real e inteligencia artificial se integran al control de calidad. Q-LAB hoy puede anticipar el defecto antes de que ocurra, usando los datos que ya genera su proceso. ¿Qué hace la empresa?</p>
+        <div class="opt-grid">
+          <button class="opt-btn" data-opt="a"><span class="k">A</span>Usar analítica de datos y monitoreo en tiempo real, integrado a su sistema ISO ya existente.</button>
+          <button class="opt-btn" data-opt="b"><span class="k">B</span>Regresar a la inspección manual al 100&nbsp;% porque "es más confiable".</button>
+          <button class="opt-btn" data-opt="c"><span class="k">C</span>Ignorar los datos digitales y seguir solo con cartas de control en papel.</button>
+        </div>
+        <div class="outcome era" data-for="a">Esta es la frontera actual: la tecnología no sustituye lo aprendido en las etapas anteriores, lo potencia.</div>
+        <div class="outcome behind" data-for="b">Es un retroceso completo, más de 100 años atrás.</div>
+        <div class="outcome behind" data-for="c">Se pierde la oportunidad de anticipar el problema en vez de solo reaccionar a él.</div>
+        <p class="learn">Aprendizaje: la calidad de hoy integra todo lo anterior — inspección, estadística, prevención, cultura y normalización — más tecnología.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="cta">
+      <div>
+        <h3>Tarea T2 · Batalla de los gurús</h3>
+        <p>Ya viste cómo respondería la empresa en cada época. Ahora compara autores concretos —
+        Deming, Juran, Crosby, Ishikawa y uno más — y decide cuál aplicarías primero hoy en Q-LAB.</p>
+      </div>
+      <a class="btn ghost" href="#" onclick="alert('Instrucciones completas de T2 — se integran en Canvas.'); return false;">Ver instrucciones T2</a>
+    </div>
+  </section>
+
+  <div class="pager">
+    <a href="semana-01.html">← Semana 1 — Caso detonador</a>
+    <a href="semana-03.html">Semana 3 — Detective de datos →</a>
+  </div>
+
+</main>
+
+<footer class="site">Q-LAB 360 — Sistemas y Aseguramiento de la Calidad</footer>
+<script src="assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 3 — Q-LAB 360</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <h1 class="masthead-title"><small>Sistemas y Aseguramiento de la Calidad</small><a href="index.html" style="color:inherit;text-decoration:none;">Q-LAB 360</a></h1>
+    <div class="masthead-meta">Semana 3 de 16<br>Hoja de verificación y estratificación</div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Semanas del curso">
+  <div class="rail-inner">
+    <a href="semana-01.html" class="tag is-open"><b>01</b> Sistema y calidad</a>
+    <a href="semana-02.html" class="tag is-open"><b>02</b> Evolución</a>
+    <a href="semana-03.html" class="tag is-current"><b>03</b> Verificación</a>
+    <span class="tag is-locked"><b>04</b> Pareto</span>
+    <span class="tag is-locked"><b>05</b> Parcial 1</span>
+    <span class="tag is-locked"><b>06</b> Causa raíz</span>
+    <span class="tag is-locked"><b>07</b> Control</span>
+    <span class="tag is-locked"><b>08</b> Mapeo</span>
+    <span class="tag is-locked"><b>09</b> Estrategia</span>
+    <span class="tag is-locked"><b>10</b> Parcial 2</span>
+    <span class="tag is-locked"><b>11</b> ISO 9001</span>
+    <span class="tag is-locked"><b>12</b> Normas</span>
+    <span class="tag is-locked"><b>13</b> NOM</span>
+    <span class="tag is-locked"><b>14</b> Riesgos</span>
+    <span class="tag is-locked"><b>15</b> Parcial 3</span>
+    <span class="tag is-locked"><b>16</b> Cierre</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Detective de datos</div>
+    <h1 class="h-lg">Se libera el primer<br>paquete de producción</h1>
+    <p class="lede">Q-LAB entregó el registro de defectos de las últimas dos semanas, sin clasificar
+    ni ordenar. Tu trabajo: diseñar una hoja de verificación, estratificar el registro por al menos
+    dos variables, y descubrir qué patrón se esconde ahí.</p>
+    <span class="stamp blue">30 registros · sin procesar</span>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">03·A</span><h2 class="h-md">Registro de producción</h2></div>
+    <p style="color:var(--ink-soft);font-size:14px;margin-top:-4px;">Últimas dos semanas · todas las líneas y turnos.
+      &nbsp;<a href="assets/datos-semana3.csv" download>Descargar CSV ↓</a></p>
+
+    <div class="table-scroll" style="max-height:420px;overflow-y:auto;">
+      <table>
+        <thead>
+          <tr><th class="num">#</th><th>Fecha</th><th>Turno</th><th>Línea</th><th>Proveedor</th><th>Tipo de defecto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">1</td><td>11-ago</td><td>Matutino</td><td>Línea 1</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">2</td><td>11-ago</td><td>Vespertino</td><td>Línea 2</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">3</td><td>11-ago</td><td>Nocturno</td><td>Línea 1</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">4</td><td>12-ago</td><td>Matutino</td><td>Línea 3</td><td>Proveedor A</td><td>Ensamble incompleto</td></tr>
+          <tr><td class="num">5</td><td>12-ago</td><td>Vespertino</td><td>Línea 1</td><td>Proveedor C</td><td>Color fuera de especificación</td></tr>
+          <tr><td class="num">6</td><td>12-ago</td><td>Nocturno</td><td>Línea 2</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">7</td><td>13-ago</td><td>Matutino</td><td>Línea 2</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">8</td><td>13-ago</td><td>Nocturno</td><td>Línea 3</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">9</td><td>13-ago</td><td>Vespertino</td><td>Línea 1</td><td>Proveedor A</td><td>Empaque dañado</td></tr>
+          <tr><td class="num">10</td><td>14-ago</td><td>Nocturno</td><td>Línea 1</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">11</td><td>14-ago</td><td>Matutino</td><td>Línea 2</td><td>Proveedor C</td><td>Rebaba</td></tr>
+          <tr><td class="num">12</td><td>14-ago</td><td>Vespertino</td><td>Línea 3</td><td>Proveedor A</td><td>Ensamble incompleto</td></tr>
+          <tr><td class="num">13</td><td>15-ago</td><td>Nocturno</td><td>Línea 2</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">14</td><td>15-ago</td><td>Matutino</td><td>Línea 1</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">15</td><td>15-ago</td><td>Vespertino</td><td>Línea 1</td><td>Proveedor C</td><td>Color fuera de especificación</td></tr>
+          <tr><td class="num">16</td><td>18-ago</td><td>Nocturno</td><td>Línea 3</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">17</td><td>18-ago</td><td>Matutino</td><td>Línea 2</td><td>Proveedor A</td><td>Ensamble incompleto</td></tr>
+          <tr><td class="num">18</td><td>18-ago</td><td>Vespertino</td><td>Línea 1</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">19</td><td>19-ago</td><td>Nocturno</td><td>Línea 1</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">20</td><td>19-ago</td><td>Matutino</td><td>Línea 3</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">21</td><td>19-ago</td><td>Vespertino</td><td>Línea 2</td><td>Proveedor C</td><td>Empaque dañado</td></tr>
+          <tr><td class="num">22</td><td>20-ago</td><td>Nocturno</td><td>Línea 2</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">23</td><td>20-ago</td><td>Matutino</td><td>Línea 1</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">24</td><td>20-ago</td><td>Vespertino</td><td>Línea 3</td><td>Proveedor A</td><td>Ensamble incompleto</td></tr>
+          <tr><td class="num">25</td><td>21-ago</td><td>Nocturno</td><td>Línea 1</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">26</td><td>21-ago</td><td>Matutino</td><td>Línea 2</td><td>Proveedor C</td><td>Color fuera de especificación</td></tr>
+          <tr><td class="num">27</td><td>21-ago</td><td>Vespertino</td><td>Línea 1</td><td>Proveedor A</td><td>Rebaba</td></tr>
+          <tr><td class="num">28</td><td>22-ago</td><td>Nocturno</td><td>Línea 3</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+          <tr><td class="num">29</td><td>22-ago</td><td>Matutino</td><td>Línea 1</td><td>Proveedor A</td><td>Empaque dañado</td></tr>
+          <tr><td class="num">30</td><td>22-ago</td><td>Vespertino</td><td>Línea 2</td><td>Proveedor B</td><td>Fuera de dimensión</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">03·B</span><h2 class="h-md">Tu hoja de verificación</h2></div>
+    <p style="color:var(--ink-soft);font-size:14px;margin-top:-4px;">Da clic en las celdas y captura tu conteo (tally) por turno y tipo de defecto. Esta hoja no se guarda al recargar la página — pásala a tu formato final antes de cerrar el navegador.</p>
+    <div class="table-scroll">
+      <table>
+        <caption>Hoja de verificación — conteo por turno y tipo de defecto</caption>
+        <thead>
+          <tr><th>Tipo de defecto</th><th>Matutino</th><th>Vespertino</th><th>Nocturno</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fuera de dimensión</td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td></tr>
+          <tr><td>Rebaba / acabado</td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td></tr>
+          <tr><td>Ensamble incompleto</td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td></tr>
+          <tr><td>Color fuera de especif.</td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td></tr>
+          <tr><td>Empaque dañado</td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td><td class="fill" contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><button class="btn ghost" style="color:var(--ink);border-color:var(--line);" data-action="reset-hoja">Limpiar hoja</button></p>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">03·C</span><h2 class="h-md">Actividad en clase</h2></div>
+    <ol class="steps">
+      <li><strong>Diseña tu hoja de verificación (15 min).</strong> Define qué variables vas a capturar (arriba tienes una base por turno — puedes ampliarla por línea o proveedor).</li>
+      <li><strong>Captura y estratifica (35 min).</strong> Llena tu hoja con el registro completo. Estratifica por al menos 2 variables (por ejemplo: turno + proveedor).</li>
+      <li><strong>Identifica el patrón (20 min).</strong> ¿Qué combinación de variables concentra más defectos? Redacta el hallazgo en un párrafo.</li>
+      <li><strong>Puesta en común (10 min).</strong> Comparen su estratificación con otro equipo — ¿llegaron al mismo patrón?</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="cta">
+      <div>
+        <h3>Tarea T3 · Detective de datos</h3>
+        <p>Diseña tu hoja de verificación, estratifica el registro por al menos 2 variables y entrega
+        tu hallazgo redactado.</p>
+      </div>
+      <a class="btn" href="#" onclick="alert('Instrucciones completas de T3 — se integran en Canvas.'); return false;">Ver instrucciones T3</a>
+    </div>
+  </section>
+
+  <div class="pager">
+    <a href="semana-02.html">← Semana 2 — Evolución de la calidad</a>
+    <span class="is-disabled">Semana 4 — Próximamente →</span>
+  </div>
+
+</main>
+
+<footer class="site">Q-LAB 360 — Sistemas y Aseguramiento de la Calidad</footer>
+<script src="assets/script.js"></script>
+</body>
+</html>
