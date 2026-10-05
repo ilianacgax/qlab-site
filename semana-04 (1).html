@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 4 — Q-LAB 360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Q-LAB 360 — Semana 4 (autocontenida: funciona sola o dentro
+   de la carpeta del sitio junto a assets/style.css)
+   ============================================================ */
+:root{
+  --paper:#EFEBE1; --paper-alt:#E4DFD1; --card:#FAF8F2; --ink:#21241F; --ink-soft:#5B5D52;
+  --line:#C9C2AC; --line-soft:#DBD5C4;
+  --tag-yellow:#E1A234; --tag-yellow-ink:#4A3200;
+  --stamp-blue:#2B5C6B; --stamp-blue-soft:#E4EEF0;
+  --stamp-red:#A8402F; --stamp-red-soft:#F5E4E0;
+  --stamp-green:#4C7A52; --stamp-green-soft:#E7EFE4;
+  /* series de datos (paleta validada para daltonismo) */
+  --s-mat:#0F74A8; --s-ves:#C9831A; --s-noc:#B83A2A;
+  --bar-vital:#0F74A8; --bar-trivial:#B9B3A0; --cum:#21241F;
+  --radius:3px; --shadow:0 1px 0 rgba(33,36,31,.06),0 8px 20px -14px rgba(33,36,31,.35);
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--stamp-blue)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--tag-yellow);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+.masthead{border-bottom:3px solid var(--ink);background:var(--card)}
+.masthead-inner{max-width:1040px;margin:0 auto;padding:22px 20px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.masthead-title{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);margin:0;text-transform:uppercase}
+.masthead-title small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-soft);font-weight:500;margin-bottom:4px}
+.masthead-meta{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-align:right}
+
+.rail{background:var(--paper-alt);border-bottom:1px solid var(--line);overflow-x:auto}
+.rail-inner{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;gap:8px}
+.tag{flex:0 0 auto;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);color:var(--ink-soft);text-decoration:none;white-space:nowrap}
+.tag b{font-family:var(--display);font-weight:700;font-size:13px;color:var(--ink)}
+.tag.is-open{border-color:var(--stamp-blue);background:var(--stamp-blue-soft);color:var(--stamp-blue)}
+.tag.is-open b{color:var(--stamp-blue)}
+.tag.is-current{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tag.is-current b{color:var(--tag-yellow)}
+.tag.is-locked{opacity:.55}
+
+.hero{padding:40px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stamp-blue);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--tag-yellow)}
+h1.h-lg{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5vw,52px);line-height:.98;margin:0 0 14px}
+.lede{font-size:17px;color:var(--ink-soft);max-width:66ch;margin:0 0 12px}
+.stamp{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:6px 12px;border:2.5px solid currentColor;border-radius:2px;transform:rotate(-2deg);color:var(--stamp-blue)}
+
+section.block{padding:30px 0;border-top:1px dashed var(--line)}
+.block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.block-num{font-family:var(--mono);color:var(--tag-yellow-ink);background:var(--tag-yellow);padding:2px 7px;font-size:12px;border-radius:2px;font-weight:600}
+h2.h-md{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:26px;margin:0}
+h3.h-sm{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:18px;margin:0 0 8px}
+.hint{color:var(--ink-soft);font-size:14px;margin:-2px 0 14px;max-width:75ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+.memo{background:var(--card);border-left:4px solid var(--stamp-blue);padding:16px 20px;font-size:15.5px;box-shadow:var(--shadow);border-radius:0 var(--radius) var(--radius) 0}
+.memo p{margin:0 0 10px}.memo p:last-child{margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tool{display:grid;grid-template-columns:330px 1fr;gap:16px;align-items:start}
+
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card)}
+caption{text-align:left;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:6px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+thead th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tbody tr:nth-child(even){background:var(--paper-alt)}
+td.num,th.num{font-family:var(--mono);text-align:right}
+tfoot td{font-family:var(--mono);font-weight:600;background:var(--paper-alt)}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+
+/* marcas de conteo */
+.tally{font-family:var(--mono);letter-spacing:1px;white-space:nowrap;color:var(--ink)}
+.t5{position:relative;display:inline-block;margin-right:7px}
+.t5::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:1.6px;background:var(--stamp-red);transform:rotate(-24deg)}
+
+input[type=number],input[type=text],select,textarea{font-family:var(--body);font-size:14px;border:1.5px solid var(--line);border-radius:var(--radius);background:#fff;padding:6px 8px;color:var(--ink);width:100%}
+input.tot{width:76px;text-align:right;font-family:var(--mono)}
+input.ok{border-color:var(--stamp-green);background:var(--stamp-green-soft)}
+input.bad{border-color:var(--stamp-red);background:var(--stamp-red-soft)}
+textarea{min-height:84px;resize:vertical;line-height:1.45}
+label.lbl{display:block;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 4px}
+
+.btn{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;background:var(--tag-yellow);color:var(--tag-yellow-ink);border:none;padding:9px 14px;border-radius:2px;font-weight:600;cursor:pointer;display:inline-block;text-decoration:none}
+.btn.sec{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.btn.sec:hover{border-color:var(--stamp-blue);color:var(--stamp-blue)}
+.btn.dark{background:var(--ink);color:var(--paper)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.feedback{margin-top:10px;font-size:14px;padding:10px 12px;border-radius:var(--radius);display:none}
+.feedback.show{display:block}
+.feedback.good{background:var(--stamp-green-soft);border:1px solid var(--stamp-green)}
+.feedback.warn{background:var(--stamp-red-soft);border:1px solid var(--stamp-red)}
+
+/* editor de pareto */
+.prow{display:grid;grid-template-columns:1fr 78px 28px;gap:6px;margin-bottom:6px}
+.prow input[type=number]{text-align:right;font-family:var(--mono)}
+.xbtn{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);cursor:pointer;color:var(--ink-soft);font-size:16px;line-height:1}
+.xbtn:hover{color:var(--stamp-red);border-color:var(--stamp-red)}
+
+/* gráficas */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 8px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.chart svg{display:block;width:100%;height:auto}
+.chart-title{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:17px;margin:0 0 2px}
+.chart-sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin:4px 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:2px;display:inline-block}
+.sw.line{height:2px;width:16px;border-radius:0}
+.sw.dash{height:0;width:16px;border-top:2px dashed var(--stamp-red);border-radius:0}
+.axis text{font-family:var(--mono);font-size:10.5px;fill:var(--ink-soft)}
+.grid line{stroke:var(--line-soft);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:12.5px;padding:7px 9px;border-radius:3px;line-height:1.35;opacity:0;transition:opacity .1s;white-space:nowrap;z-index:5}
+.tip b{color:var(--tag-yellow);font-weight:600}
+.empty{fill:var(--ink-soft);font-family:var(--body);font-size:13px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:9px 11px}
+.stat .k{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.stat .v{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1}
+.stat.alert .v{color:var(--stamp-red)}
+
+.controls{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+.controls>div{min-width:150px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;flex-wrap:wrap}
+.seg button{font-family:var(--mono);font-size:12px;border:none;background:var(--card);padding:7px 10px;cursor:pointer;color:var(--ink);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+input[type=range]{width:100%;accent-color:var(--stamp-blue)}
+
+.datagrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:4px;font-family:var(--mono);font-size:12.5px}
+.datagrid div{background:var(--card);border:1px solid var(--line-soft);padding:4px 6px;border-radius:2px;display:flex;justify-content:space-between;gap:4px}
+.datagrid i{font-style:normal;font-weight:600}
+details.raw{margin-top:12px}
+details.raw summary{cursor:pointer;font-family:var(--mono);font-size:12.5px;color:var(--stamp-blue)}
+
+/* ishikawa */
+.clues{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.clue{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.clue .src{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--stamp-blue)}
+.clue p{margin:0}
+.clue .sel{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.clue.done{border-color:var(--stamp-blue);box-shadow:inset 3px 0 0 var(--stamp-blue)}
+.clue.right{box-shadow:inset 3px 0 0 var(--stamp-green);border-color:var(--stamp-green)}
+.clue.wrong{box-shadow:inset 3px 0 0 var(--stamp-red);border-color:var(--stamp-red)}
+.clue .why{font-size:12.5px;color:var(--ink-soft);display:none;border-top:1px dashed var(--line);padding-top:6px}
+.clue.right .why,.clue.wrong .why{display:block}
+.own{display:grid;grid-template-columns:170px 1fr 150px auto;gap:8px;align-items:end}
+.fish-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:8px}
+.fish-wrap svg{min-width:820px;width:100%;height:auto;display:block}
+.ownlist{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.ownlist li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:3px 6px 3px 12px;font-size:13px;display:flex;align-items:center;gap:6px}
+.ownlist li small{font-family:var(--mono);color:var(--stamp-blue)}
+
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:step;display:grid;gap:10px}
+ol.steps li{counter-increment:step;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+ol.steps li::before{content:counter(step);font-family:var(--display);font-weight:800;font-size:16px;width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.timebadge{font-family:var(--mono);font-size:11.5px;color:var(--stamp-blue);margin-left:6px}
+
+.cta{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.cta h3{font-family:var(--display);text-transform:uppercase;font-weight:800;margin:0 0 4px;font-size:20px}
+.cta p{margin:0;color:#C8C3B2;font-size:14px;max-width:56ch}
+.pager{display:flex;justify-content:space-between;gap:10px;padding:30px 0 50px;border-top:1px solid var(--line);margin-top:10px;flex-wrap:wrap}
+.pager a,.pager span{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--ink)}
+.pager .is-disabled{opacity:.4}
+footer.site{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);padding:18px 0 34px}
+
+@media (max-width:860px){
+  .tool,.grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .own{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  .wrap,.masthead-inner,.rail-inner{padding-left:16px;padding-right:16px}
+  .masthead-inner{flex-direction:column;align-items:flex-start}
+  .masthead-meta{text-align:left}
+  .own{grid-template-columns:1fr}
+  .clue .sel{grid-template-columns:1fr}
+}
+@media print{
+  .rail,.btnrow,.btn,.pager,.no-print,details.raw,.tip,footer.site{display:none!important}
+  body{background:#fff}
+  section.block{break-inside:avoid-page;padding:14px 0}
+  .card,.chart,.fish-wrap{box-shadow:none}
+  .fish-wrap{overflow:visible}.fish-wrap svg{min-width:0}
+  .print-only{display:block!important}
+}
+.print-only{display:none}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <h1 class="masthead-title"><small>Sistemas y Aseguramiento de la Calidad</small><a href="index.html" style="color:inherit;text-decoration:none;">Q-LAB 360</a></h1>
+    <div class="masthead-meta">Semana 4 de 16<br>Pareto · Histograma · Ishikawa</div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Semanas del curso">
+  <div class="rail-inner">
+    <a href="semana-01.html" class="tag is-open"><b>01</b> Sistema y calidad</a>
+    <a href="semana-02.html" class="tag is-open"><b>02</b> Evolución</a>
+    <a href="semana-03.html" class="tag is-open"><b>03</b> Verificación</a>
+    <a href="semana-04.html" class="tag is-current"><b>04</b> Pareto</a>
+    <span class="tag is-locked"><b>05</b> Parcial 1</span>
+    <span class="tag is-locked"><b>06</b> Causa raíz</span>
+    <span class="tag is-locked"><b>07</b> Control</span>
+    <span class="tag is-locked"><b>08</b> Mapeo</span>
+    <span class="tag is-locked"><b>09</b> Estrategia</span>
+    <span class="tag is-locked"><b>10</b> Parcial 2</span>
+    <span class="tag is-locked"><b>11</b> ISO 9001</span>
+    <span class="tag is-locked"><b>12</b> Normas</span>
+    <span class="tag is-locked"><b>13</b> NOM</span>
+    <span class="tag is-locked"><b>14</b> Riesgos</span>
+    <span class="tag is-locked"><b>15</b> Parcial 3</span>
+    <span class="tag is-locked"><b>16</b> Cierre</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="eyebrow">Laboratorio de datos de calidad</div>
+    <h1 class="h-lg">Solo alcanza para<br>atacar un problema</h1>
+    <p class="lede">La Dirección de Q-LAB revisó su hallazgo de la semana 3 y respondió con una condición:
+    <strong>"Tenemos presupuesto para atacar un solo problema este trimestre. Demuéstrenme con datos cuál es,
+    cómo se comporta y qué lo está provocando."</strong></p>
+    <p class="lede">Hoy llega el paquete ampliado: la hoja de verificación de septiembre y 60 mediciones de la
+    dimensión crítica de la carcasa CX-200. Con ellas construirán tres herramientas, en este orden:</p>
+    <span class="stamp">Pareto → Histograma → Ishikawa</span>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">Equipo</span><h2 class="h-md">Datos del equipo</h2></div>
+    <div class="grid2">
+      <div><label class="lbl" for="team">Nombre del equipo</label><input type="text" id="team" data-save placeholder="Ej. Equipo 3 — Consultores Delta"></div>
+      <div><label class="lbl" for="members">Integrantes</label><input type="text" id="members" data-save placeholder="Nombres de los integrantes"></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Lo que captures en esta página se conserva en este navegador mientras no borres sus datos. Al final hay un botón para imprimir o guardar el reporte del equipo en PDF.</p>
+  </section>
+
+  <!-- ================= 04·A HOJA DE VERIFICACIÓN ================= -->
+  <section class="block" id="hoja">
+    <div class="block-head"><span class="block-num">04·A</span><h2 class="h-md">Hoja de verificación · septiembre</h2></div>
+    <p class="hint">Inspección final de la carcasa CX-200 en las tres líneas. Cada marca es una pieza rechazada.
+    <strong>Cuenten las marcas y capturen el total de cada defecto</strong> en la última columna; esos totales alimentan el Pareto.</p>
+
+    <div class="table-scroll">
+      <table id="tallyTable">
+        <caption>Hoja de verificación — piezas rechazadas por tipo de defecto y semana</caption>
+        <thead><tr><th>Tipo de defecto</th><th>Sem 1</th><th>Sem 2</th><th>Sem 3</th><th>Sem 4</th><th class="num">Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="btnrow">
+      <button class="btn sec" id="checkTotals">Verificar mis totales</button>
+      <button class="btn" id="toPareto">Enviar totales al Pareto ↓</button>
+    </div>
+    <div class="feedback" id="totalsFb"></div>
+
+    <h3 class="h-sm" style="margin-top:26px">Estratificación del defecto "Fuera de dimensión"</h3>
+    <p class="hint">Calidad separó los rechazos por dimensión según turno y línea. Lo necesitarán para el Pareto de segundo nivel.</p>
+    <div class="table-scroll" style="max-width:560px">
+      <table>
+        <thead><tr><th>Turno</th><th class="num">Línea 1</th><th class="num">Línea 2</th><th class="num">Línea 3</th><th class="num">Total</th></tr></thead>
+        <tbody>
+          <tr><td>Matutino</td><td class="num">4</td><td class="num">3</td><td class="num">3</td><td class="num">10</td></tr>
+          <tr><td>Vespertino</td><td class="num">6</td><td class="num">5</td><td class="num">3</td><td class="num">14</td></tr>
+          <tr><td>Nocturno</td><td class="num">18</td><td class="num">15</td><td class="num">11</td><td class="num">44</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="num">28</td><td class="num">23</td><td class="num">17</td><td class="num">68</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 04·B PARETO ================= -->
+  <section class="block" id="pareto">
+    <div class="block-head"><span class="block-num">04·B</span><h2 class="h-md">Diagrama de Pareto</h2></div>
+    <p class="hint">El diagrama ordena las categorías de mayor a menor y acumula su porcentaje. Las barras y la línea comparten la
+    misma escala (% del total), así que la línea punteada del 80&nbsp;% señala directo dónde están los <strong>pocos vitales</strong>.
+    Puedes editar, agregar o quitar categorías: úsalo también para el <strong>Pareto de segundo nivel</strong> (por turno) y para el de tu proyecto.</p>
+
+    <div class="tool">
+      <div class="card">
+        <h3 class="h-sm">Datos</h3>
+        <div class="prow" style="margin-bottom:4px"><span class="lbl" style="margin:0">Categoría</span><span class="lbl" style="margin:0;text-align:right">Frec.</span><span></span></div>
+        <div id="pRows"></div>
+        <div class="btnrow" style="margin-top:6px">
+          <button class="btn sec" id="pAdd">+ Categoría</button>
+          <button class="btn sec" id="pLevel2">Cargar nivel 2 (turnos)</button>
+          <button class="btn sec" id="pClear">Vaciar</button>
+        </div>
+        <div style="margin-top:14px">
+          <label class="lbl" for="pTitle">Título de la gráfica</label>
+          <input type="text" id="pTitle" value="Pareto de defectos — carcasa CX-200, septiembre">
+        </div>
+      </div>
+
+      <div>
+        <div class="chart" id="pChartBox">
+          <p class="chart-title" id="pChartTitle">Pareto</p>
+          <p class="chart-sub" id="pChartSub">Captura frecuencias para ver la gráfica.</p>
+          <div class="legend">
+            <span><i class="sw" style="background:var(--bar-vital)"></i>Pocos vitales (hasta ~80&nbsp;%)</span>
+            <span><i class="sw" style="background:var(--bar-trivial)"></i>Muchos triviales</span>
+            <span><i class="sw line" style="background:var(--cum)"></i>% acumulado</span>
+            <span><i class="sw dash"></i>Corte 80&nbsp;%</span>
+          </div>
+          <svg id="pSvg" viewBox="0 0 640 340" role="img" aria-label="Diagrama de Pareto"></svg>
+          <div class="tip" id="pTip"></div>
+        </div>
+        <div class="table-scroll" style="margin-top:12px">
+          <table id="pTable">
+            <caption>Tabla de Pareto (calculada)</caption>
+            <thead><tr><th>#</th><th>Categoría</th><th class="num">Frec.</th><th class="num">%</th><th class="num">% acum.</th><th>Clase</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Interpretación del Pareto</h3>
+      <div class="grid2">
+        <div><label class="lbl" for="pQ1">1. ¿Qué categorías son los pocos vitales y qué % acumulan? (dato exacto, no "a ojo")</label><textarea id="pQ1" data-save></textarea></div>
+        <div><label class="lbl" for="pQ2">2. En el Pareto de segundo nivel, ¿qué turno concentra los rechazos por dimensión? ¿Qué te dice eso?</label><textarea id="pQ2" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04·C HISTOGRAMA ================= -->
+  <section class="block" id="histograma">
+    <div class="block-head"><span class="block-num">04·C</span><h2 class="h-md">Histograma de la dimensión crítica</h2></div>
+    <p class="hint">Metrología midió el <strong>largo de la ceja de ensamble</strong> en 60 carcasas (20 por turno) el 29 de septiembre.
+    Especificación del cliente: <strong>25.00 ± 0.10 mm</strong> (LIE = 24.90 · LSE = 25.10). Ajusta el número de clases y
+    estratifica por turno: la misma información puede contar historias distintas.</p>
+
+    <div class="controls no-print">
+      <div style="min-width:220px">
+        <label class="lbl" for="hK">Número de clases: <span id="hKv">7</span> <span style="text-transform:none">(Sturges sugiere 7)</span></label>
+        <input type="range" id="hK" min="4" max="15" value="7">
+      </div>
+      <div>
+        <span class="lbl">Vista</span>
+        <div class="seg" id="hView" role="group" aria-label="Vista del histograma">
+          <button data-v="all" aria-pressed="true">Todos</button>
+          <button data-v="strat" aria-pressed="false">Estratificado</button>
+          <button data-v="M" aria-pressed="false">Matutino</button>
+          <button data-v="V" aria-pressed="false">Vespertino</button>
+          <button data-v="N" aria-pressed="false">Nocturno</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart">
+      <p class="chart-title" id="hTitle">Histograma — largo de ceja (mm)</p>
+      <p class="chart-sub" id="hSub"></p>
+      <div class="legend" id="hLegend"></div>
+      <svg id="hSvg" viewBox="0 0 720 330" role="img" aria-label="Histograma de la dimensión crítica"></svg>
+      <div class="tip" id="hTip"></div>
+    </div>
+
+    <div class="stats" id="hStats"></div>
+
+    <details class="raw">
+      <summary>Ver la tabla de frecuencias</summary>
+      <div class="table-scroll" style="margin-top:8px">
+        <table id="hFreq"><thead><tr><th>Clase</th><th class="num">Lím. inferior</th><th class="num">Lím. superior</th><th class="num">Marca de clase</th><th class="num">Frecuencia</th><th class="num">% </th></tr></thead><tbody></tbody></table>
+      </div>
+    </details>
+    <details class="raw">
+      <summary>Ver las 60 mediciones (M = matutino · V = vespertino · N = nocturno)</summary>
+      <div class="datagrid" id="hRaw" style="margin-top:8px"></div>
+    </details>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Interpretación del histograma</h3>
+      <div class="grid2">
+        <div><label class="lbl" for="hQ1">3. Forma, centrado y dispersión: ¿el proceso global cumple la especificación? ¿Qué % queda fuera?</label><textarea id="hQ1" data-save></textarea></div>
+        <div><label class="lbl" for="hQ2">4. Al estratificar, ¿qué turno se comporta distinto? ¿Es un problema de centrado o de dispersión?</label><textarea id="hQ2" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04·D ISHIKAWA ================= -->
+  <section class="block" id="ishikawa">
+    <div class="block-head"><span class="block-num">04·D</span><h2 class="h-md">Diagrama de Ishikawa (6M)</h2></div>
+    <p class="hint">Con el problema ya acotado por el Pareto y el histograma, el equipo entrevistó a la planta y reunió estas pistas.
+    Para cada una decidan <strong>a qué M pertenece</strong> y si es un <strong>dato verificable</strong> o una <strong>suposición</strong>.
+    Las suposiciones también entran al diagrama, pero marcadas con línea punteada: son hipótesis por comprobar, no causas.</p>
+
+    <div class="card" style="margin-bottom:14px">
+      <label class="lbl" for="iProblem">Efecto (cabeza del pescado) — redáctalo con lo que te dijeron el Pareto y el histograma</label>
+      <input type="text" id="iProblem" data-save placeholder="Ej. Carcasas fuera de dimensión (ceja > LSE) en el turno …">
+    </div>
+
+    <div class="clues" id="clues"></div>
+
+    <h3 class="h-sm" style="margin-top:22px">Agrega causas propias</h3>
+    <p class="hint">Máximo 6 causas por M se dibujan en el diagrama; si tienen más, prioricen.</p>
+    <div class="own">
+      <div><label class="lbl" for="oM">Categoría</label><select id="oM"></select></div>
+      <div><label class="lbl" for="oTxt">Causa</label><input type="text" id="oTxt" maxlength="70" placeholder="Ej. Sin verificación de primera pieza al arrancar turno"></div>
+      <div><label class="lbl" for="oType">Tipo</label><select id="oType"><option value="dato">Dato verificable</option><option value="sup">Suposición</option></select></div>
+      <button class="btn" id="oAdd">Agregar</button>
+    </div>
+    <ul class="ownlist" id="ownList"></ul>
+
+    <div class="btnrow">
+      <button class="btn sec" id="iCheck">Revisar mi clasificación de pistas</button>
+      <button class="btn sec" id="iReset">Reiniciar pistas</button>
+    </div>
+    <div class="feedback" id="iFb"></div>
+
+    <div class="fish-wrap" style="margin-top:16px">
+      <svg id="fish" viewBox="0 0 1000 540" role="img" aria-label="Diagrama de Ishikawa"></svg>
+    </div>
+    <div class="legend" style="margin-top:8px">
+      <span><i class="sw line" style="background:var(--ink)"></i>Dato verificable</span>
+      <span><i class="sw" style="height:0;width:16px;border-top:2px dashed var(--ink-soft);border-radius:0"></i>Suposición (por comprobar)</span>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Interpretación del Ishikawa</h3>
+      <div class="grid2">
+        <div><label class="lbl" for="iQ1">5. ¿Qué 2 causas consideras más probables y qué evidencia del caso las respalda?</label><textarea id="iQ1" data-save></textarea></div>
+        <div><label class="lbl" for="iQ2">6. ¿Qué dato tendrías que levantar para confirmar o descartar cada una?</label><textarea id="iQ2" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04·E DECISIÓN ================= -->
+  <section class="block" id="decision">
+    <div class="block-head"><span class="block-num">04·E</span><h2 class="h-md">Recomendación a la Dirección</h2></div>
+    <div class="memo">
+      <label class="lbl" for="dec">En máximo 5 líneas: ¿qué problema atacar, por qué (con cifras de las tres herramientas) y cuál es el primer paso?</label>
+      <textarea id="dec" data-save style="min-height:120px"></textarea>
+    </div>
+    <div class="btnrow">
+      <button class="btn dark" onclick="window.print()">Imprimir / guardar reporte en PDF</button>
+    </div>
+  </section>
+
+  <div class="pager">
+    <a href="semana-03.html">← Semana 3 — Detective de datos</a>
+    <span class="is-disabled">Semana 5 — Próximamente →</span>
+  </div>
+</main>
+
+<footer class="site">Q-LAB 360 — Sistemas y Aseguramiento de la Calidad</footer>
+
+<script>
+(function(){
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const $=s=>document.querySelector(s);
+const el=(tag,attrs={},parent)=>{const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.appendChild(n);return n;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=(n,d=1)=>Number(n).toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+/* ---------- almacenamiento (opcional, tolerante a fallos) ---------- */
+const KEY='qlab-s4-v1';
+let store={};
+try{store=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){store={};}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}};
+document.querySelectorAll('[data-save]').forEach(n=>{
+  if(store['f_'+n.id]!=null)n.value=store['f_'+n.id];
+  n.addEventListener('input',()=>{store['f_'+n.id]=n.value;save();if(n.id==='iProblem')drawFish();});
+});
+
+/* ================= HOJA DE VERIFICACIÓN ================= */
+const TALLY=[
+  ['Fuera de dimensión',[14,16,18,20]],
+  ['Rebaba / acabado',[11,10,9,11]],
+  ['Ensamble incompleto',[6,5,6,5]],
+  ['Color fuera de especificación',[3,4,3,4]],
+  ['Empaque dañado',[2,3,2,2]],
+  ['Rayones',[1,2,1,2]],
+  ['Otros',[1,1,1,1]]
+];
+const tallyHTML=n=>{let s='';for(let i=0;i<Math.floor(n/5);i++)s+='<span class="t5">||||</span>';s+='|'.repeat(n%5);return '<span class="tally" aria-label="'+n+' marcas">'+s+'</span>';};
+const tb=$('#tallyTable tbody');
+TALLY.forEach(([name,w],i)=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML='<td>'+esc(name)+'</td>'+w.map(v=>'<td>'+tallyHTML(v)+'</td>').join('')+
+    '<td class="num"><input class="tot" type="number" min="0" id="tot'+i+'" aria-label="Total de '+esc(name)+'"></td>';
+  tb.appendChild(tr);
+});
+TALLY.forEach((_,i)=>{const inp=$('#tot'+i);if(store['tot'+i]!=null)inp.value=store['tot'+i];inp.addEventListener('input',()=>{store['tot'+i]=inp.value;inp.classList.remove('ok','bad');save();});});
+
+$('#checkTotals').addEventListener('click',()=>{
+  let ok=0,blank=0;
+  TALLY.forEach(([,w],i)=>{const inp=$('#tot'+i);inp.classList.remove('ok','bad');
+    if(inp.value===''){blank++;return;}
+    const right=+inp.value===w.reduce((a,b)=>a+b,0);inp.classList.add(right?'ok':'bad');if(right)ok++;});
+  const fb=$('#totalsFb');fb.className='feedback show '+(ok===TALLY.length?'good':'warn');
+  fb.textContent=ok===TALLY.length?'¡Totales correctos! Ya pueden enviarlos al Pareto.':
+    ok+' de '+TALLY.length+' totales correctos'+(blank?' ('+blank+' sin capturar)':'')+'. Revisen las celdas en rojo: cada grupo tachado vale 5.';
+});
+$('#toPareto').addEventListener('click',()=>{
+  const rows=TALLY.map(([n],i)=>({c:n,f:$('#tot'+i).value===''?'':+$('#tot'+i).value}));
+  if(rows.every(r=>r.f==='')){const fb=$('#totalsFb');fb.className='feedback show warn';fb.textContent='Primero capturen los totales en la hoja de verificación.';return;}
+  pData=rows;$('#pTitle').value='Pareto de defectos — carcasa CX-200, septiembre';renderPRows();drawPareto();
+  document.getElementById('pareto').scrollIntoView();
+});
+
+/* ================= PARETO ================= */
+let pData=store.pData||TALLY.map(([n])=>({c:n,f:''}));
+if(store.pTitle)$('#pTitle').value=store.pTitle;
+function renderPRows(){
+  const box=$('#pRows');box.innerHTML='';
+  pData.forEach((r,i)=>{
+    const d=document.createElement('div');d.className='prow';
+    d.innerHTML='<input type="text" value="'+esc(r.c)+'" aria-label="Categoría '+(i+1)+'"><input type="number" min="0" value="'+(r.f===''?'':r.f)+'" aria-label="Frecuencia '+(i+1)+'"><button class="xbtn" title="Quitar" aria-label="Quitar categoría">×</button>';
+    const [t,f,x]=d.children;
+    t.addEventListener('input',()=>{r.c=t.value;drawPareto();});
+    f.addEventListener('input',()=>{r.f=f.value===''?'':Math.max(0,+f.value);drawPareto();});
+    x.addEventListener('click',()=>{pData.splice(i,1);renderPRows();drawPareto();});
+    box.appendChild(d);
+  });
+}
+$('#pAdd').addEventListener('click',()=>{pData.push({c:'Nueva categoría',f:''});renderPRows();drawPareto();});
+$('#pClear').addEventListener('click',()=>{pData=[{c:'',f:''}];renderPRows();drawPareto();});
+$('#pLevel2').addEventListener('click',()=>{pData=[{c:'Matutino',f:''},{c:'Vespertino',f:''},{c:'Nocturno',f:''}];$('#pTitle').value='Pareto 2.º nivel — Fuera de dimensión por turno';renderPRows();drawPareto();});
+$('#pTitle').addEventListener('input',drawPareto);
+
+function drawPareto(){
+  store.pData=pData;store.pTitle=$('#pTitle').value;save();
+  const svg=$('#pSvg');svg.innerHTML='';
+  $('#pChartTitle').textContent=$('#pTitle').value||'Pareto';
+  const rows=pData.filter(r=>r.f!==''&&+r.f>0&&String(r.c).trim()!=='').map(r=>({c:String(r.c).trim(),f:+r.f}));
+  // "Otros" siempre al final por convención
+  rows.sort((a,b)=>{const oa=/^otros?$/i.test(a.c),ob=/^otros?$/i.test(b.c);if(oa!==ob)return oa?1:-1;return b.f-a.f;});
+  const total=rows.reduce((a,r)=>a+r.f,0);
+  const tbody=$('#pTable tbody');tbody.innerHTML='';
+  if(!rows.length){$('#pChartSub').textContent='Captura frecuencias para ver la gráfica.';el('text',{x:320,y:170,'text-anchor':'middle',class:'empty'},svg).textContent='Sin datos todavía';return;}
+  let cum=0;
+  rows.forEach(r=>{r.p=r.f/total*100;cum+=r.p;r.cum=cum;});
+  // regla: es vital mientras el acumulado anterior sea < 80 %
+  cum=0;rows.forEach(r=>{r.vital=cum<79.5;cum+=r.p;});
+  const nv=rows.filter(r=>r.vital).length;
+  const vitalPct=rows.filter(r=>r.vital).reduce((a,r)=>a+r.p,0);
+  $('#pChartSub').textContent='n = '+total+' · '+nv+' de '+rows.length+' categorías ('+fmt(nv/rows.length*100,0)+' %) acumulan el '+fmt(vitalPct)+' % de los casos';
+
+  const W=640,H=340,m={l:46,r:16,t:14,b:78};const iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const y=v=>m.t+ih-(v/100)*ih;const bw=iw/rows.length;
+  const g=el('g',{class:'grid'},svg);const ax=el('g',{class:'axis'},svg);
+  [0,20,40,60,80,100].forEach(v=>{el('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v)},g);const t=el('text',{x:m.l-6,y:y(v)+3.5,'text-anchor':'end'},ax);t.textContent=v+'%';});
+  el('line',{x1:m.l,x2:W-m.r,y1:y(0),y2:y(0),stroke:'#21241F','stroke-width':1},svg);
+  // barras
+  rows.forEach((r,i)=>{
+    const x=m.l+i*bw+Math.min(6,bw*.12),w=bw-2*Math.min(6,bw*.12),h=ih*r.p/100,top=y(r.p),rad=Math.min(4,w/2,h);
+    const d='M'+x+','+y(0)+'V'+(top+rad)+'Q'+x+','+top+' '+(x+rad)+','+top+'H'+(x+w-rad)+'Q'+(x+w)+','+top+' '+(x+w)+','+(top+rad)+'V'+y(0)+'Z';
+    el('path',{d,fill:r.vital?'var(--bar-vital)':'var(--bar-trivial)'},svg);
+    const inside=h>26;const lbl=el('text',{x:x+w/2,y:inside?y(0)-8:top-5,'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':10.5,'font-weight':600,fill:inside?'#FFFFFF':'#21241F','pointer-events':'none'},svg);lbl.textContent=r.f;
+    const ct=el('text',{transform:'translate('+(x+w/2)+','+(y(0)+12)+') rotate(-32)','text-anchor':'end','font-family':'IBM Plex Sans, sans-serif','font-size':10.5,fill:'#5B5D52'},svg);
+    ct.textContent=r.c.length>20?r.c.slice(0,19)+'…':r.c;
+    r.cx=x+w/2;
+    const hit=el('rect',{x:m.l+i*bw,y:m.t,width:bw,height:ih,fill:'transparent'},svg);
+    hit.addEventListener('mousemove',ev=>tip('#pTip','#pChartBox',ev,'<b>'+esc(r.c)+'</b><br>Frecuencia: '+r.f+'<br>% del total: '+fmt(r.p)+' %<br>% acumulado: '+fmt(r.cum)+' %'));
+    hit.addEventListener('mouseleave',()=>hideTip('#pTip'));
+  });
+  // línea 80 %
+  el('line',{x1:m.l,x2:W-m.r,y1:y(80),y2:y(80),stroke:'var(--stamp-red)','stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+  const t80=el('text',{x:W-m.r-2,y:y(80)-5,'text-anchor':'end','font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'var(--stamp-red)'},svg);t80.textContent='80 %';
+  // acumulado
+  const pts=rows.map(r=>r.cx+','+y(r.cum)).join(' ');
+  el('polyline',{points:m.l+','+y(0)+' '+pts,fill:'none',stroke:'var(--cum)','stroke-width':2,'stroke-linejoin':'round'},svg);
+  rows.forEach((r,i)=>{el('circle',{cx:r.cx,cy:y(r.cum),r:4,fill:'var(--cum)',stroke:'#FAF8F2','stroke-width':2,'pointer-events':'none'},svg);
+    if(r.vital||i===rows.length-1){const t=el('text',{x:r.cx+6,y:y(r.cum)+(i===rows.length-1?14:-7),'font-family':'IBM Plex Mono, monospace','font-size':10,fill:'#21241F','pointer-events':'none'},svg);t.textContent=fmt(r.cum)+'%';}});
+  // tabla
+  rows.forEach((r,i)=>{const tr=document.createElement('tr');tr.innerHTML='<td class="num">'+(i+1)+'</td><td>'+esc(r.c)+'</td><td class="num">'+r.f+'</td><td class="num">'+fmt(r.p)+'</td><td class="num">'+fmt(r.cum)+'</td><td>'+(r.vital?'<strong style="color:var(--bar-vital)">Vital</strong>':'Trivial')+'</td>';tbody.appendChild(tr);});
+  const tr=document.createElement('tr');tr.innerHTML='<td></td><td><strong>Total</strong></td><td class="num"><strong>'+total+'</strong></td><td class="num">100.0</td><td></td><td></td>';tbody.appendChild(tr);
+}
+function tip(sel,box,ev,html){const t=$(sel),b=$(box).getBoundingClientRect();t.innerHTML=html;t.style.opacity=1;
+  let x=ev.clientX-b.left+14,yy=ev.clientY-b.top+14;const tw=t.offsetWidth;if(x+tw>b.width-4)x=ev.clientX-b.left-tw-14;t.style.left=x+'px';t.style.top=yy+'px';}
+function hideTip(sel){$(sel).style.opacity=0;}
+
+/* ================= HISTOGRAMA ================= */
+const RAW=[['N',25.16],['M',25.03],['V',25.00],['M',25.01],['M',24.99],['V',25.08],['V',25.04],['V',24.98],['N',25.14],['M',24.93],['V',25.03],['N',25.12],['V',25.06],['N',25.12],['N',25.10],['M',25.04],['N',25.06],['M',25.02],['N',25.11],['M',24.99],['N',25.03],['V',25.01],['M',24.93],['N',25.11],['V',24.98],['N',25.05],['M',25.01],['N',25.11],['M',25.04],['V',25.02],['M',25.02],['M',25.02],['M',25.02],['N',25.08],['N',25.13],['M',25.02],['N',25.14],['V',25.02],['M',24.96],['V',25.03],['V',24.99],['M',24.98],['M',24.99],['N',25.08],['N',25.13],['N',25.15],['V',24.99],['M',24.93],['M',24.99],['M',24.96],['V',25.06],['V',24.97],['V',24.98],['V',24.99],['V',25.03],['N',25.11],['V',25.01],['V',25.02],['N',25.05],['N',25.17]];
+const LIE=24.90,LSE=25.10,NOM=25.00;
+const TURN={M:{n:'Matutino',c:'var(--s-mat)'},V:{n:'Vespertino',c:'var(--s-ves)'},N:{n:'Nocturno',c:'var(--s-noc)'}};
+$('#hRaw').innerHTML=RAW.map(([t,v],i)=>'<div title="Pieza '+(i+1)+'"><span>'+t+'</span><i style="color:'+(v>LSE||v<LIE?'var(--stamp-red)':'inherit')+'">'+v.toFixed(2)+'</i></div>').join('');
+let hView=store.hView||'all';
+$('#hK').value=store.hK||7;
+document.querySelectorAll('#hView button').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.v===hView);b.addEventListener('click',()=>{hView=b.dataset.v;document.querySelectorAll('#hView button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawHist();});});
+$('#hK').addEventListener('input',drawHist);
+
+function stats(vals){const n=vals.length,mean=vals.reduce((a,b)=>a+b,0)/n;const sd=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)**2,0)/(n-1));
+  const out=vals.filter(v=>v>LSE+1e-9||v<LIE-1e-9).length;return{n,mean,sd,min:Math.min(...vals),max:Math.max(...vals),out};}
+
+function drawHist(){
+  const k=+$('#hK').value;$('#hKv').textContent=k;store.hK=k;store.hView=hView;save();
+  const all=RAW.map(r=>r[1]);const lo=Math.min(...all),hi=Math.max(...all);const w=(hi-lo)/k;
+  const sel=hView==='all'||hView==='strat'?RAW:RAW.filter(r=>r[0]===hView);
+  const bins=[...Array(k)].map((_,i)=>({a:lo+i*w,b:lo+(i+1)*w,M:0,V:0,N:0,t:0}));
+  sel.forEach(([t,v])=>{let i=Math.floor((v-lo)/w+1e-9);if(i>=k)i=k-1;bins[i][t]++;bins[i].t++;});
+  const st=stats(sel.map(r=>r[1]));
+  const label=hView==='all'?'todas las piezas':hView==='strat'?'estratificado por turno':'turno '+TURN[hView].n.toLowerCase();
+  $('#hSub').textContent='n = '+st.n+' · '+label+' · '+k+' clases de '+w.toFixed(4)+' mm';
+  // leyenda
+  const lg=$('#hLegend');let lh='';
+  if(hView==='strat')lh+=['M','V','N'].map(t=>'<span><i class="sw" style="background:'+TURN[t].c+'"></i>'+TURN[t].n+'</span>').join('');
+  else lh+='<span><i class="sw" style="background:'+(hView==='all'?'var(--stamp-blue)':TURN[hView].c)+'"></i>Frecuencia</span>';
+  lh+='<span><i class="sw dash"></i>Límites de especificación</span><span><i class="sw line" style="background:var(--stamp-green)"></i>Nominal 25.00</span><span><i class="sw line" style="background:var(--ink)"></i>Media</span>';
+  lg.innerHTML=lh;
+
+  const svg=$('#hSvg');svg.innerHTML='';
+  const W=720,H=330,m={l:40,r:20,t:26,b:46},iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const dlo=Math.min(lo,LIE)-0.02,dhi=Math.max(hi,LSE)+0.02;
+  const x=v=>m.l+(v-dlo)/(dhi-dlo)*iw;
+  const maxF=Math.max(...bins.map(b=>b.t),1);const top=Math.max(4,Math.ceil(maxF/2)*2+ (maxF%2===0?2:0));
+  const y=v=>m.t+ih-(v/top)*ih;
+  const g=el('g',{class:'grid'},svg),ax=el('g',{class:'axis'},svg);
+  const step=top<=10?2:top<=20?4:5;
+  for(let v=0;v<=top;v+=step){el('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v)},g);el('text',{x:m.l-6,y:y(v)+3.5,'text-anchor':'end'},ax).textContent=v;}
+  // fondo de zona fuera de especificación
+  el('rect',{x:m.l,y:m.t,width:Math.max(0,x(LIE)-m.l),height:ih,fill:'var(--stamp-red-soft)',opacity:.6},svg);
+  el('rect',{x:x(LSE),y:m.t,width:Math.max(0,W-m.r-x(LSE)),height:ih,fill:'var(--stamp-red-soft)',opacity:.6},svg);
+  // barras (2px de separación)
+  bins.forEach((b,i)=>{
+    const x0=x(b.a)+1,x1=x(b.b)-1,bw=x1-x0;let base=y(0);
+    const segs=hView==='strat'?['M','V','N'].filter(t=>b[t]>0).map(t=>({t,v:b[t]})):b.t>0?[{t:hView==='all'?null:hView,v:b.t}]:[];
+    segs.forEach((s,j)=>{const h=(s.v/top)*ih;const last=j===segs.length-1;const yTop=base-h;const gap=j>0?2:0;
+      const fill=s.t?TURN[s.t].c:'var(--stamp-blue)';
+      if(last){const r=Math.min(4,bw/2,h-gap);el('path',{d:'M'+x0+','+(base-gap)+'V'+(yTop+r)+'Q'+x0+','+yTop+' '+(x0+r)+','+yTop+'H'+(x1-r)+'Q'+x1+','+yTop+' '+x1+','+(yTop+r)+'V'+(base-gap)+'Z',fill},svg);}
+      else el('rect',{x:x0,y:yTop,width:bw,height:h-gap,fill},svg);
+      base=yTop;});
+    if(b.t>0)el('text',{x:(x0+x1)/2,y:y(b.t)-5,'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#21241F'},svg).textContent=b.t;
+    const hit=el('rect',{x:x(b.a),y:m.t,width:x(b.b)-x(b.a),height:ih,fill:'transparent'},svg);
+    const det=hView==='strat'?'<br>Mat: '+b.M+' · Ves: '+b.V+' · Noc: '+b.N:'';
+    hit.addEventListener('mousemove',ev=>tip('#hTip','#histograma .chart',ev,'<b>'+b.a.toFixed(3)+' – '+b.b.toFixed(3)+' mm</b><br>Frecuencia: '+b.t+det));
+    hit.addEventListener('mouseleave',()=>hideTip('#hTip'));
+  });
+  el('line',{x1:m.l,x2:W-m.r,y1:y(0),y2:y(0),stroke:'#21241F'},svg);
+  // eje x: límites de clase
+  bins.forEach((b,i)=>{if(k<=9||i%2===0)el('text',{x:x(b.a),y:y(0)+15,'text-anchor':'middle'},ax).textContent=b.a.toFixed(3);});
+  el('text',{x:x(hi),y:y(0)+15,'text-anchor':'middle'},ax).textContent=hi.toFixed(3);
+  el('text',{x:m.l+iw/2,y:H-6,'text-anchor':'middle'},ax).textContent='Largo de ceja (mm)';
+  // líneas de referencia
+  [[LIE,'LIE 24.90','var(--stamp-red)','5 4'],[LSE,'LSE 25.10','var(--stamp-red)','5 4'],[NOM,'Nominal','var(--stamp-green)',''],[st.mean,'x̄ '+st.mean.toFixed(3),'var(--ink)','']].forEach(([v,t,c,da],i)=>{
+    el('line',{x1:x(v),x2:x(v),y1:m.t-4,y2:y(0),stroke:c,'stroke-width':i===3?2:1.5,'stroke-dasharray':da,'pointer-events':'none'},svg);
+    const anchor=i===0?'start':i===1?'end':'middle';const dx=i===0?4:i===1?-4:0;
+    el('text',{x:x(v)+dx,y:i===3?m.t-8:m.t+10,'text-anchor':i===3?'middle':anchor,'font-family':'IBM Plex Mono, monospace','font-size':10,fill:c,'pointer-events':'none'},svg).textContent=t;
+  });
+  // estadísticos
+  const pctOut=st.out/st.n*100;
+  const cards=[['n',st.n],['Media (x̄)',st.mean.toFixed(3)+' mm'],['Desv. estándar (s)',st.sd.toFixed(4)],['Rango',(st.max-st.min).toFixed(2)+' mm'],
+    ['Mínimo',st.min.toFixed(2)],['Máximo',st.max.toFixed(2)],['Desvío vs. nominal',(st.mean-NOM>=0?'+':'')+(st.mean-NOM).toFixed(3)],['Fuera de especificación',st.out+' ('+fmt(pctOut)+' %)',pctOut>0]];
+  $('#hStats').innerHTML=cards.map(([k,v,a])=>'<div class="stat'+(a?' alert':'')+'"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>').join('');
+  // tabla de frecuencias
+  $('#hFreq tbody').innerHTML=bins.map((b,i)=>'<tr><td class="num">'+(i+1)+'</td><td class="num">'+b.a.toFixed(4)+'</td><td class="num">'+b.b.toFixed(4)+'</td><td class="num">'+((b.a+b.b)/2).toFixed(4)+'</td><td class="num">'+b.t+'</td><td class="num">'+fmt(b.t/st.n*100)+'</td></tr>').join('');
+}
+
+/* ================= ISHIKAWA ================= */
+const MS=['Máquina','Método','Mano de obra','Material','Medición','Medio ambiente'];
+const CLUES=[
+  {id:'c1',s:'Molde M-07 sin mantenimiento preventivo desde junio',src:'Bitácora de mantenimiento',t:'El molde M-07 (Línea 1) no recibe mantenimiento preventivo desde junio; el plan indica cada 6 semanas.',m:'Máquina',k:'dato',why:'Máquina · dato: está documentado en la bitácora y se puede verificar.'},
+  {id:'c2',s:'Agua de enfriamiento 4 °C más fría de noche; ciclo sin ajustar',src:'Sensores de planta',t:'El agua de enfriamiento de los moldes llega 4 °C más fría entre 23:00 y 06:00, y nadie ajusta el tiempo de ciclo.',m:'Medio ambiente',k:'dato',why:'Medio ambiente · dato: condición del entorno registrada por sensores (también toca Método, porque nadie ajusta).'},
+  {id:'c3',s:'5 de 9 operarios nocturnos con menos de 3 meses',src:'Recursos Humanos',t:'5 de los 9 operarios del turno nocturno tienen menos de 3 meses en la empresa.',m:'Mano de obra',k:'dato',why:'Mano de obra · dato: es un registro de RH. Ojo: por sí solo no prueba que causen el defecto.'},
+  {id:'c4',s:'Sin instrucción de trabajo para ajuste de parámetros al arranque',src:'Entrevista a supervisor nocturno',t:'No existe instrucción de trabajo escrita para ajustar los parámetros de inyección al arrancar el turno.',m:'Método',k:'dato',why:'Método · dato: se verifica revisando los procedimientos documentados.'},
+  {id:'c5',s:'Calibrador nocturno con calibración vencida desde agosto',src:'Laboratorio de metrología',t:'El calibrador vernier del turno nocturno tiene la calibración vencida desde agosto.',m:'Medición',k:'dato',why:'Medición · dato: el certificado de calibración vencido es evidencia objetiva.'},
+  {id:'c6',s:'Nocturno usa solo resina Proveedor B (mayor fluidez)',src:'Almacén de materia prima',t:'Desde julio el turno nocturno usa solo resina del Proveedor B, cuyo lote tiene mayor índice de fluidez.',m:'Material',k:'dato',why:'Material · dato: está en registros de almacén y en el certificado del lote. Conecta con su hallazgo de la semana 3.'},
+  {id:'c7',s:'"No le echan ganas" (opinión de supervisor)',src:'Comentario en pasillo',t:'Un supervisor dice: "los del turno de noche simplemente no le echan ganas".',m:'Mano de obra',k:'sup',why:'Mano de obra · suposición: es una opinión, no hay ningún dato que la respalde.'},
+  {id:'c8',s:'"Siempre es culpa del proveedor" (gerente)',src:'Junta de gerencia',t:'El gerente de compras asegura: "seguro es culpa del proveedor, siempre lo es".',m:'Material',k:'sup',why:'Material · suposición: una generalización. La pista del Proveedor B sí es dato; esta frase no.'},
+  {id:'c9',s:'"La inyectora de Línea 3 ya está vieja" (rumor)',src:'Rumor de planta',t:'"La inyectora de la Línea 3 ya está vieja, por eso salen mal las piezas."',m:'Máquina',k:'sup',why:'Máquina · suposición, y además los datos la contradicen: la Línea 3 es la que menos rechazos por dimensión tiene.'},
+  {id:'c10',s:'Muestreo nocturno cada 8 h en vez de cada 4 h',src:'Plan de control',t:'El plan indica muestrear 5 piezas cada 4 horas; en el turno nocturno los registros aparecen cada 8 horas.',m:'Método',k:'dato',why:'Método · dato: el procedimiento no se cumple y queda evidencia en los registros. (Medición también es defendible.)'}
+];
+let iState=store.iState||{};let own=store.own||[];
+const opt=(arr,val,ph)=>'<option value="">'+ph+'</option>'+arr.map(a=>'<option'+(a===val?' selected':'')+'>'+a+'</option>').join('');
+$('#oM').innerHTML=MS.map(m=>'<option>'+m+'</option>').join('');
+function renderClues(){
+  $('#clues').innerHTML=CLUES.map(c=>{const s=iState[c.id]||{};
+    return '<div class="clue'+(s.m&&s.k?' done':'')+'" id="cl-'+c.id+'"><span class="src">'+esc(c.src)+'</span><p>'+esc(c.t)+'</p><div class="sel">'+
+    '<select data-c="'+c.id+'" data-f="m" aria-label="Categoría">'+opt(MS,s.m,'¿Qué M?')+'</select>'+
+    '<select data-c="'+c.id+'" data-f="k" aria-label="Tipo"><option value="">¿Dato o suposición?</option><option value="dato"'+(s.k==='dato'?' selected':'')+'>Dato verificable</option><option value="sup"'+(s.k==='sup'?' selected':'')+'>Suposición</option></select>'+
+    '</div><div class="why">'+esc(c.why)+'</div></div>';}).join('');
+  document.querySelectorAll('#clues select').forEach(s=>s.addEventListener('change',()=>{const c=s.dataset.c;iState[c]=iState[c]||{};iState[c][s.dataset.f]=s.value;
+    const card=$('#cl-'+c);card.classList.remove('right','wrong');card.classList.toggle('done',!!(iState[c].m&&iState[c].k));store.iState=iState;save();drawFish();}));
+}
+function renderOwn(){
+  $('#ownList').innerHTML=own.map((o,i)=>'<li><small>'+esc(o.m)+'</small> '+esc(o.t)+(o.k==='sup'?' <em>(suposición)</em>':'')+' <button class="xbtn" data-i="'+i+'" aria-label="Quitar">×</button></li>').join('');
+  document.querySelectorAll('#ownList button').forEach(b=>b.addEventListener('click',()=>{own.splice(+b.dataset.i,1);store.own=own;save();renderOwn();drawFish();}));
+}
+$('#oAdd').addEventListener('click',()=>{const t=$('#oTxt').value.trim();if(!t)return;own.push({m:$('#oM').value,t,k:$('#oType').value});$('#oTxt').value='';store.own=own;save();renderOwn();drawFish();});
+$('#oTxt').addEventListener('keydown',e=>{if(e.key==='Enter')$('#oAdd').click();});
+$('#iCheck').addEventListener('click',()=>{
+  let ok=0,done=0;
+  CLUES.forEach(c=>{const s=iState[c.id]||{};const card=$('#cl-'+c.id);card.classList.remove('right','wrong');
+    if(!s.m||!s.k)return;done++;
+    const alt=(c.id==='c2'&&s.m==='Método')||(c.id==='c10'&&s.m==='Medición');
+    const right=(s.m===c.m||alt)&&s.k===c.k;card.classList.add(right?'right':'wrong');if(right)ok++;});
+  const fb=$('#iFb');fb.className='feedback show '+(ok===CLUES.length?'good':'warn');
+  fb.innerHTML=done<CLUES.length?'Clasificaron '+done+' de '+CLUES.length+' pistas; de ellas '+ok+' son correctas. Completen las demás.':
+    (ok===CLUES.length?'<strong>Clasificación completa y correcta.</strong> Ahora decidan cuáles causas, de todas las que sí son datos, explican mejor el patrón del histograma.':
+    ok+' de '+CLUES.length+' correctas. Lean la explicación debajo de cada pista en rojo.');
+});
+$('#iReset').addEventListener('click',()=>{iState={};store.iState=iState;save();renderClues();drawFish();$('#iFb').className='feedback';});
+
+function wrap2(t,n){const w=t.split(' ');const out=[''];w.forEach(x=>{const cur=out[out.length-1];if((cur+' '+x).trim().length<=n)out[out.length-1]=(cur+' '+x).trim();else out.push(x);});
+  if(out.length>2){out[1]=out.slice(1).join(' ');}if(out[1]&&out[1].length>n)out[1]=out[1].slice(0,n-1)+'…';return out.slice(0,2);}
+function drawFish(){
+  const svg=$('#fish');svg.innerHTML='';
+  const W=1000,H=540,sy=270,x0=30,xh=800;
+  const causes={};MS.forEach(m=>causes[m]=[]);
+  CLUES.forEach(c=>{const s=iState[c.id]||{};if(s.m)causes[s.m].push({t:c.s,full:c.t,k:s.k||'dato'});});
+  own.forEach(o=>causes[o.m].push({t:o.t,k:o.k}));
+  // espina
+  el('line',{x1:x0,y1:sy,x2:xh,y2:sy,stroke:'#21241F','stroke-width':4,'stroke-linecap':'round'},svg);
+  el('polygon',{points:(xh-2)+','+(sy-9)+' '+(xh+14)+','+sy+' '+(xh-2)+','+(sy+9),fill:'#21241F'},svg);
+  // cabeza
+  const prob=($('#iProblem').value||'Efecto: escribe el problema arriba').trim();
+  el('rect',{x:xh+18,y:sy-70,width:W-xh-26,height:140,rx:6,fill:'#21241F'},svg);
+  const fo=el('foreignObject',{x:xh+26,y:sy-64,width:W-xh-42,height:128},svg);
+  const div=document.createElement('div');div.setAttribute('xmlns','http://www.w3.org/1999/xhtml');
+  div.style.cssText='color:#EFEBE1;font:600 14px/1.3 "IBM Plex Sans",sans-serif;height:128px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden';
+  div.textContent=prob;fo.appendChild(div);
+  // espinas: 3 arriba, 3 abajo
+  const cols=[200,450,700];
+  MS.forEach((m,i)=>{
+    const up=i<3,bx=cols[i%3],tipY=up?44:H-44;const endX=bx+110;
+    el('line',{x1:bx,y1:tipY,x2:endX,y2:sy,stroke:'#21241F','stroke-width':2.5},svg);
+    // etiqueta de categoría
+    el('rect',{x:bx-82,y:up?tipY-30:tipY+4,width:164,height:26,rx:3,fill:'#E1A234'},svg);
+    el('text',{x:bx,y:up?tipY-12:tipY+22,'text-anchor':'middle','font-family':'Barlow Condensed, sans-serif','font-weight':700,'font-size':16,fill:'#4A3200','letter-spacing':'.04em'},svg).textContent=m.toUpperCase();
+    // causas
+    const list=causes[m].slice(0,6);const n=list.length;
+    const span=sy-tipY;// signo según arriba/abajo
+    list.forEach((c,j)=>{
+      const f=(j+1)/(Math.max(n,3)+1);const cy=tipY+span*f;const cx=bx+(endX-bx)*f;
+      const len=196;
+      el('line',{x1:cx-len,y1:cy,x2:cx,y2:cy,stroke:c.k==='sup'?'#8A8B80':'#21241F','stroke-width':1.3,'stroke-dasharray':c.k==='sup'?'4 3':''},svg);
+      const tx=el('text',{x:cx-len,y:cy-4,'font-family':'IBM Plex Sans, sans-serif','font-size':11.5,fill:c.k==='sup'?'#6E7065':'#21241F','font-style':c.k==='sup'?'italic':'normal'},svg);
+      const lines=wrap2((c.k==='sup'?'(?) ':'')+c.t,34);
+      tx.setAttribute('y',cy-4-(lines.length-1)*13);
+      lines.forEach((ln,li)=>{const ts=el('tspan',{x:cx-len,dy:li?13:0},tx);ts.textContent=ln;});
+      el('title',{},tx).textContent=(c.full||c.t)+(c.k==='sup'?' — suposición':'');
+    });
+    if(causes[m].length>6)el('text',{x:bx-80,y:up?tipY+span*.98:tipY+span*.98,'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#5B5D52'},svg).textContent='+'+(causes[m].length-6)+' más';
+    if(!n)el('text',{x:bx-60,y:tipY+span*.5,'font-family':'IBM Plex Sans, sans-serif','font-size':11.5,fill:'#9A9B90','font-style':'italic'},svg).textContent='(sin causas aún)';
+  });
+}
+
+renderPRows();drawPareto();drawHist();renderClues();renderOwn();drawFish();
+})();
+</script>
+</body>
+</html>
