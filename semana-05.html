@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 5 — Q-LAB 360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Q-LAB 360 — Semana 5 (autocontenida: funciona sola o dentro
+   de la carpeta del sitio junto a assets/style.css)
+   ============================================================ */
+:root{
+  --paper:#EFEBE1; --paper-alt:#E4DFD1; --card:#FAF8F2; --ink:#21241F; --ink-soft:#5B5D52;
+  --line:#C9C2AC; --line-soft:#DBD5C4;
+  --tag-yellow:#E1A234; --tag-yellow-ink:#4A3200;
+  --stamp-blue:#2B5C6B; --stamp-blue-soft:#E4EEF0;
+  --stamp-red:#A8402F; --stamp-red-soft:#F5E4E0;
+  --stamp-green:#4C7A52; --stamp-green-soft:#E7EFE4;
+  /* series de datos (paleta validada para daltonismo) */
+  --s-mat:#0F74A8; --s-ves:#C9831A; --s-noc:#B83A2A;
+  --bar-vital:#0F74A8; --bar-trivial:#B9B3A0; --cum:#21241F;
+  --radius:3px; --shadow:0 1px 0 rgba(33,36,31,.06),0 8px 20px -14px rgba(33,36,31,.35);
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--stamp-blue)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--tag-yellow);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+.masthead{border-bottom:3px solid var(--ink);background:var(--card)}
+.masthead-inner{max-width:1040px;margin:0 auto;padding:22px 20px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.masthead-title{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);margin:0;text-transform:uppercase}
+.masthead-title small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-soft);font-weight:500;margin-bottom:4px}
+.masthead-meta{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-align:right}
+
+.rail{background:var(--paper-alt);border-bottom:1px solid var(--line);overflow-x:auto}
+.rail-inner{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;gap:8px}
+.tag{flex:0 0 auto;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);color:var(--ink-soft);text-decoration:none;white-space:nowrap}
+.tag b{font-family:var(--display);font-weight:700;font-size:13px;color:var(--ink)}
+.tag.is-open{border-color:var(--stamp-blue);background:var(--stamp-blue-soft);color:var(--stamp-blue)}
+.tag.is-open b{color:var(--stamp-blue)}
+.tag.is-current{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tag.is-current b{color:var(--tag-yellow)}
+.tag.is-locked{opacity:.55}
+
+.hero{padding:40px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stamp-blue);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--tag-yellow)}
+h1.h-lg{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5vw,52px);line-height:.98;margin:0 0 14px}
+.lede{font-size:17px;color:var(--ink-soft);max-width:66ch;margin:0 0 12px}
+.stamp{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding:6px 12px;border:2.5px solid currentColor;border-radius:2px;transform:rotate(-2deg);color:var(--stamp-blue)}
+
+section.block{padding:30px 0;border-top:1px dashed var(--line)}
+.block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.block-num{font-family:var(--mono);color:var(--tag-yellow-ink);background:var(--tag-yellow);padding:2px 7px;font-size:12px;border-radius:2px;font-weight:600}
+h2.h-md{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:26px;margin:0}
+h3.h-sm{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:18px;margin:0 0 8px}
+.hint{color:var(--ink-soft);font-size:14px;margin:-2px 0 14px;max-width:75ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+.memo{background:var(--card);border-left:4px solid var(--stamp-blue);padding:16px 20px;font-size:15.5px;box-shadow:var(--shadow);border-radius:0 var(--radius) var(--radius) 0}
+.memo p{margin:0 0 10px}.memo p:last-child{margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tool{display:grid;grid-template-columns:330px 1fr;gap:16px;align-items:start}
+
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card)}
+caption{text-align:left;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:6px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+thead th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tbody tr:nth-child(even){background:var(--paper-alt)}
+td.num,th.num{font-family:var(--mono);text-align:right}
+tfoot td{font-family:var(--mono);font-weight:600;background:var(--paper-alt)}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+
+/* marcas de conteo */
+.tally{font-family:var(--mono);letter-spacing:1px;white-space:nowrap;color:var(--ink)}
+.t5{position:relative;display:inline-block;margin-right:7px}
+.t5::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:1.6px;background:var(--stamp-red);transform:rotate(-24deg)}
+
+input[type=number],input[type=text],select,textarea{font-family:var(--body);font-size:14px;border:1.5px solid var(--line);border-radius:var(--radius);background:#fff;padding:6px 8px;color:var(--ink);width:100%}
+input.tot{width:76px;text-align:right;font-family:var(--mono)}
+input.ok{border-color:var(--stamp-green);background:var(--stamp-green-soft)}
+input.bad{border-color:var(--stamp-red);background:var(--stamp-red-soft)}
+textarea{min-height:84px;resize:vertical;line-height:1.45}
+label.lbl{display:block;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 4px}
+
+.btn{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;background:var(--tag-yellow);color:var(--tag-yellow-ink);border:none;padding:9px 14px;border-radius:2px;font-weight:600;cursor:pointer;display:inline-block;text-decoration:none}
+.btn.sec{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.btn.sec:hover{border-color:var(--stamp-blue);color:var(--stamp-blue)}
+.btn.dark{background:var(--ink);color:var(--paper)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.feedback{margin-top:10px;font-size:14px;padding:10px 12px;border-radius:var(--radius);display:none}
+.feedback.show{display:block}
+.feedback.good{background:var(--stamp-green-soft);border:1px solid var(--stamp-green)}
+.feedback.warn{background:var(--stamp-red-soft);border:1px solid var(--stamp-red)}
+
+/* editor de pareto */
+.prow{display:grid;grid-template-columns:1fr 78px 28px;gap:6px;margin-bottom:6px}
+.prow input[type=number]{text-align:right;font-family:var(--mono)}
+.xbtn{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);cursor:pointer;color:var(--ink-soft);font-size:16px;line-height:1}
+.xbtn:hover{color:var(--stamp-red);border-color:var(--stamp-red)}
+
+/* gráficas */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 8px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.chart svg{display:block;width:100%;height:auto}
+.chart-title{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:17px;margin:0 0 2px}
+.chart-sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin:4px 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:2px;display:inline-block}
+.sw.line{height:2px;width:16px;border-radius:0}
+.sw.dash{height:0;width:16px;border-top:2px dashed var(--stamp-red);border-radius:0}
+.axis text{font-family:var(--mono);font-size:10.5px;fill:var(--ink-soft)}
+.grid line{stroke:var(--line-soft);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:12.5px;padding:7px 9px;border-radius:3px;line-height:1.35;opacity:0;transition:opacity .1s;white-space:nowrap;z-index:5}
+.tip b{color:var(--tag-yellow);font-weight:600}
+.empty{fill:var(--ink-soft);font-family:var(--body);font-size:13px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:9px 11px}
+.stat .k{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.stat .v{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1}
+.stat.alert .v{color:var(--stamp-red)}
+
+.controls{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+.controls>div{min-width:150px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;flex-wrap:wrap}
+.seg button{font-family:var(--mono);font-size:12px;border:none;background:var(--card);padding:7px 10px;cursor:pointer;color:var(--ink);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+input[type=range]{width:100%;accent-color:var(--stamp-blue)}
+
+.datagrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:4px;font-family:var(--mono);font-size:12.5px}
+.datagrid div{background:var(--card);border:1px solid var(--line-soft);padding:4px 6px;border-radius:2px;display:flex;justify-content:space-between;gap:4px}
+.datagrid i{font-style:normal;font-weight:600}
+details.raw{margin-top:12px}
+details.raw summary{cursor:pointer;font-family:var(--mono);font-size:12.5px;color:var(--stamp-blue)}
+
+/* ishikawa */
+.clues{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.clue{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.clue .src{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--stamp-blue)}
+.clue p{margin:0}
+.clue .sel{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.clue.done{border-color:var(--stamp-blue);box-shadow:inset 3px 0 0 var(--stamp-blue)}
+.clue.right{box-shadow:inset 3px 0 0 var(--stamp-green);border-color:var(--stamp-green)}
+.clue.wrong{box-shadow:inset 3px 0 0 var(--stamp-red);border-color:var(--stamp-red)}
+.clue .why{font-size:12.5px;color:var(--ink-soft);display:none;border-top:1px dashed var(--line);padding-top:6px}
+.clue.right .why,.clue.wrong .why{display:block}
+.own{display:grid;grid-template-columns:170px 1fr 150px auto;gap:8px;align-items:end}
+.fish-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:8px}
+.fish-wrap svg{min-width:820px;width:100%;height:auto;display:block}
+.ownlist{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.ownlist li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:3px 6px 3px 12px;font-size:13px;display:flex;align-items:center;gap:6px}
+.ownlist li small{font-family:var(--mono);color:var(--stamp-blue)}
+
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:step;display:grid;gap:10px}
+ol.steps li{counter-increment:step;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+ol.steps li::before{content:counter(step);font-family:var(--display);font-weight:800;font-size:16px;width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.timebadge{font-family:var(--mono);font-size:11.5px;color:var(--stamp-blue);margin-left:6px}
+
+.cta{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.cta h3{font-family:var(--display);text-transform:uppercase;font-weight:800;margin:0 0 4px;font-size:20px}
+.cta p{margin:0;color:#C8C3B2;font-size:14px;max-width:56ch}
+.pager{display:flex;justify-content:space-between;gap:10px;padding:30px 0 50px;border-top:1px solid var(--line);margin-top:10px;flex-wrap:wrap}
+.pager a,.pager span{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--ink)}
+.pager .is-disabled{opacity:.4}
+footer.site{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);padding:18px 0 34px}
+
+@media (max-width:860px){
+  .tool,.grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .own{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  .wrap,.masthead-inner,.rail-inner{padding-left:16px;padding-right:16px}
+  .masthead-inner{flex-direction:column;align-items:flex-start}
+  .masthead-meta{text-align:left}
+  .own{grid-template-columns:1fr}
+  .clue .sel{grid-template-columns:1fr}
+}
+@media print{
+  .rail,.btnrow,.btn,.pager,.no-print,details.raw,.tip,footer.site{display:none!important}
+  body{background:#fff}
+  section.block{break-inside:avoid-page;padding:14px 0}
+  .card,.chart,.fish-wrap{box-shadow:none}
+  .fish-wrap{overflow:visible}.fish-wrap svg{min-width:0}
+  .print-only{display:block!important}
+}
+.print-only{display:none}
+
+/* ============ Semana 5 — estilos adicionales ============ */
+:root{ --s-ref:#21241F; --s-mine:#C9831A; --s-ctl:#2B5C6B; --s-spec:#A8402F; }
+.theory>*,.tool>*,.grid2>*,.grid3>*,.signals>*{min-width:0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.members{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.theory{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.theory .card p{margin:0 0 10px;font-size:15px}
+.theory .card ul{margin:0 0 10px;padding-left:18px;font-size:14.5px}
+.theory .card li{margin-bottom:4px}
+.formula{font-family:var(--mono);background:var(--paper-alt);border:1px solid var(--line-soft);border-radius:var(--radius);padding:8px 10px;font-size:13.5px;margin:6px 0 10px;overflow-x:auto;white-space:nowrap}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 12px}
+.thumbs figure{margin:0;background:var(--paper-alt);border:1px solid var(--line-soft);border-radius:var(--radius);padding:6px;text-align:center}
+.thumbs figcaption{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em}
+.thumbs svg{width:100%;height:auto;display:block}
+.rscale{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:12px;margin:6px 0 10px}
+.rscale div{padding:6px 8px;border-right:1px solid var(--line)}
+.rscale div:last-child{border-right:none}
+.rscale b{display:block;font-family:var(--mono);font-size:11.5px}
+.keyidea{border-left:4px solid var(--tag-yellow);background:#FFF8E8;padding:10px 14px;font-size:14.5px;border-radius:0 var(--radius) var(--radius) 0;margin-top:10px}
+
+.quiz{display:grid;gap:10px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.q p{margin:0 0 8px;font-weight:500}
+.q label{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:3px 0;cursor:pointer}
+.q.right{border-color:var(--stamp-green);box-shadow:inset 3px 0 0 var(--stamp-green)}
+.q.wrong{border-color:var(--stamp-red);box-shadow:inset 3px 0 0 var(--stamp-red)}
+.q .why{display:none;font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--line);margin-top:8px;padding-top:6px}
+.q.right .why,.q.wrong .why{display:block}
+
+.vars td{vertical-align:middle}
+.vars select{min-width:150px}
+.vars tr.right td:first-child{box-shadow:inset 4px 0 0 var(--stamp-green)}
+.vars tr.wrong td:first-child{box-shadow:inset 4px 0 0 var(--stamp-red)}
+.vars .vy{font-size:13px;color:var(--ink-soft)}
+
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.calc input{font-family:var(--mono);text-align:right}
+.pred{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+.pred .row{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;font-size:14px}
+.pred input{font-family:var(--mono);text-align:right}
+.eq{font-family:var(--mono);font-size:15px;padding:8px 12px;background:var(--ink);color:var(--paper);border-radius:var(--radius);display:inline-block;margin-top:8px}
+.eq b{color:var(--tag-yellow);font-weight:500}
+
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.signals .item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.signals .item.right{border-color:var(--stamp-green);box-shadow:inset 3px 0 0 var(--stamp-green)}
+.signals .item.wrong{border-color:var(--stamp-red);box-shadow:inset 3px 0 0 var(--stamp-red)}
+.signals .inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+.signals .inline input{width:70px;font-family:var(--mono);text-align:right}
+.radio-row{display:flex;gap:14px;font-size:14px;margin:4px 0 8px}
+.radio-row label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.rules{counter-reset:r;list-style:none;padding:0;margin:0 0 10px}
+.rules li{counter-increment:r;display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:14px;margin-bottom:6px}
+.rules li::before{content:counter(r);font-family:var(--display);font-weight:800;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:13px}
+.compare{width:100%;font-size:13.5px}
+.compare td,.compare th{padding:6px 8px}
+
+.deliver ol{margin:0;padding-left:20px;font-size:14.5px}
+.deliver li{margin-bottom:4px}
+.print-head{display:none}
+
+@media (max-width:860px){
+  .theory,.signals,.pred,.grid3{grid-template-columns:1fr}
+  .members{grid-template-columns:1fr 1fr}
+  .calc{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  .members{grid-template-columns:1fr}
+  .rscale{grid-template-columns:1fr 1fr}
+  .rscale div:nth-child(2){border-right:none}
+  .rscale div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media print{
+  @page{size:letter;margin:14mm 12mm}
+  html,body{font-size:12px}
+  .masthead{border-bottom-width:2px}
+  .hero{padding-top:10px}
+  .lede{font-size:14px}
+  section.block{break-inside:auto}
+  .card,.chart,.q,.signals .item,.memo,table,.calc,.pred{break-inside:avoid}
+  textarea{border:1px solid var(--line);overflow:visible;resize:none}
+  input,select{border:1px solid var(--line)}
+  .signals,.pred{grid-template-columns:1fr 1fr}
+  #dispTable th,#dispTable td,#ctlTable th,#ctlTable td{padding:2px 6px;font-size:10.5px}
+  .tool{grid-template-columns:1fr}
+  .formula{white-space:normal}
+  .chart{break-inside:avoid}
+  .members{grid-template-columns:repeat(3,1fr)}
+  .table-scroll{max-height:none!important;overflow:visible!important}
+  .mrv{visibility:visible!important}
+  .print-head{display:block;font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-top:6px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <h1 class="masthead-title"><small>Sistemas y Aseguramiento de la Calidad</small><a href="index.html" style="color:inherit;text-decoration:none;">Q-LAB 360</a></h1>
+    <div class="masthead-meta">Semana 5 de 16<br>Dispersión · Gráfico de control</div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Semanas del curso">
+  <div class="rail-inner">
+    <a href="semana-01.html" class="tag is-open"><b>01</b> Sistema y calidad</a>
+    <a href="semana-02.html" class="tag is-open"><b>02</b> Evolución</a>
+    <a href="semana-03.html" class="tag is-open"><b>03</b> Verificación</a>
+    <a href="semana-04.html" class="tag is-open"><b>04</b> Pareto</a>
+    <a href="semana-05.html" class="tag is-current"><b>05</b> Dispersión y control</a>
+    <span class="tag is-locked"><b>06</b> Causa raíz</span>
+    <span class="tag is-locked"><b>07</b> Control</span>
+    <span class="tag is-locked"><b>08</b> Mapeo</span>
+    <span class="tag is-locked"><b>09</b> Estrategia</span>
+    <span class="tag is-locked"><b>10</b> Parcial 2</span>
+    <span class="tag is-locked"><b>11</b> ISO 9001</span>
+    <span class="tag is-locked"><b>12</b> Normas</span>
+    <span class="tag is-locked"><b>13</b> NOM</span>
+    <span class="tag is-locked"><b>14</b> Riesgos</span>
+    <span class="tag is-locked"><b>15</b> Parcial 3</span>
+    <span class="tag is-locked"><b>16</b> Cierre</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="eyebrow">Laboratorio de datos de calidad</div>
+    <h1 class="h-lg">¿Se está saliendo<br>de control?</h1>
+    <p class="lede">Su recomendación de la semana 4 convenció a la Dirección: el problema a atacar es
+    <strong>"fuera de dimensión"</strong> en la carcasa CX-200. Pero ahora llegan dos preguntas nuevas:</p>
+    <p class="lede"><strong>"¿El problema va a empeorar si no hacemos nada? Y lo más importante: ¿el proceso
+    está bajo control o ya le estamos entregando piezas malas al cliente?"</strong></p>
+    <p class="lede">Para responder, el equipo usará dos herramientas: el <strong>diagrama de dispersión</strong>
+    (para encontrar relaciones y proyectar) y el <strong>gráfico de control</strong> (para vigilar el proceso en el tiempo).</p>
+    <span class="stamp">Relación → Predicción → Control</span>
+  </section>
+
+  <!-- ================= EQUIPO ================= -->
+  <section class="block" id="equipo">
+    <div class="block-head"><span class="block-num">Equipo</span><h2 class="h-md">Datos del equipo</h2></div>
+    <div class="grid3">
+      <div><label class="lbl" for="team">Nombre del equipo</label><input type="text" id="team" data-save placeholder="Ej. Equipo 3 — Consultores Delta"></div>
+      <div><label class="lbl" for="group">Grupo / sección</label><input type="text" id="group" data-save placeholder="Ej. 5A"></div>
+      <div><label class="lbl" for="date">Fecha</label><input type="text" id="date" data-save placeholder="dd/mm/aaaa"></div>
+    </div>
+    <div class="members">
+      <div><label class="lbl" for="m1">Integrante 1</label><input type="text" id="m1" data-save placeholder="Nombre completo"></div>
+      <div><label class="lbl" for="m2">Integrante 2</label><input type="text" id="m2" data-save placeholder="Nombre completo"></div>
+      <div><label class="lbl" for="m3">Integrante 3</label><input type="text" id="m3" data-save placeholder="Nombre completo"></div>
+      <div><label class="lbl" for="m4">Integrante 4</label><input type="text" id="m4" data-save placeholder="Nombre completo"></div>
+      <div><label class="lbl" for="m5">Integrante 5</label><input type="text" id="m5" data-save placeholder="Nombre completo"></div>
+      <div><label class="lbl" for="m6">Integrante 6</label><input type="text" id="m6" data-save placeholder="Nombre completo (opcional)"></div>
+    </div>
+    <p class="hint no-print" style="margin-top:10px">Lo que capturen se conserva en este navegador mientras no borren sus datos. Al final hay un botón para guardar el reporte del equipo en PDF y subirlo a Canvas.</p>
+  </section>
+
+  <!-- ================= 05·A CONOCIMIENTOS ================= -->
+  <section class="block" id="teoria">
+    <div class="block-head"><span class="block-num">05·A</span><h2 class="h-md">Lo que necesitan saber</h2></div>
+    <p class="hint">Lean ambas fichas antes de empezar. Al final hay una comprobación rápida.</p>
+
+    <div class="theory">
+      <div class="card">
+        <h3 class="h-sm">Diagrama de dispersión</h3>
+        <p>Gráfica que coloca pares de datos <strong>(X, Y)</strong> como puntos para ver si dos variables
+        están relacionadas. En el eje horizontal va la <strong>variable independiente (X)</strong> —la que
+        se cree que influye— y en el vertical la <strong>dependiente (Y)</strong> —la que responde.</p>
+        <div class="thumbs" id="thumbs"></div>
+        <p><strong>Recta de regresión:</strong> la línea que mejor resume la nube de puntos.</p>
+        <div class="formula">ŷ = m·x + b &nbsp;&nbsp;→&nbsp; m = pendiente (cuánto cambia Y por cada unidad de X), b = ordenada al origen (Y cuando X = 0)</div>
+        <p><strong>Coeficiente de correlación r</strong> (de −1 a +1): mide la <em>fuerza y dirección</em> de la relación lineal.</p>
+        <div class="rscale">
+          <div><b>|r| ≥ 0.8</b>Fuerte</div>
+          <div><b>0.5 – 0.8</b>Moderada</div>
+          <div><b>0.3 – 0.5</b>Débil</div>
+          <div><b>&lt; 0.3</b>Prácticamente nula</div>
+        </div>
+        <p><strong>Coeficiente de determinación R²</strong> (de 0 a 1): qué <em>proporción de la variación de Y</em>
+        se explica con X. Si R² = 0.80, el 80 % de los cambios de Y se explican por X y el 20 % por otros factores.</p>
+        <div class="keyidea"><strong>Ojo:</strong> correlación no es causalidad. Que dos variables se muevan juntas no prueba que una cause la otra; puede haber una tercera variable detrás.</div>
+      </div>
+
+      <div class="card">
+        <h3 class="h-sm">Gráfico de control</h3>
+        <p>Gráfica de una característica de calidad <strong>en el orden del tiempo</strong>, con una línea
+        central y dos límites calculados con los propios datos del proceso. Sirve para distinguir:</p>
+        <ul>
+          <li><strong>Variación por causas comunes:</strong> la "normal", inherente al proceso.</li>
+          <li><strong>Variación por causas especiales (asignables):</strong> algo cambió —desgaste, material, operador, ajuste— y hay que investigarlo.</li>
+        </ul>
+        <svg viewBox="0 0 420 170" role="img" aria-label="Esquema de gráfico de control con límites de control y de especificación" id="ctlSchema" style="width:100%;height:auto;display:block;margin:4px 0 10px"></svg>
+        <p><strong>Gráfico de individuales (I-MR)</strong>, el que usarán hoy:</p>
+        <div class="formula">MR = |xᵢ − xᵢ₋₁| &nbsp;·&nbsp; LC = x̄ &nbsp;·&nbsp; LSC = x̄ + 2.66·MR̄ &nbsp;·&nbsp; LIC = x̄ − 2.66·MR̄</div>
+        <table class="compare">
+          <thead><tr><th></th><th>Límites de control</th><th>Límites de especificación</th></tr></thead>
+          <tbody>
+            <tr><td>¿Quién los fija?</td><td>El proceso (se calculan con los datos)</td><td>El cliente o el diseño</td></tr>
+            <tr><td>¿Qué responden?</td><td>¿El proceso es estable?</td><td>¿La pieza cumple?</td></tr>
+          </tbody>
+        </table>
+        <div class="keyidea">Un proceso puede estar <strong>bajo control pero no cumplir</strong> al cliente, o cumplir hoy y estar <strong>fuera de control</strong> (a punto de fallar).</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Señales de fuera de control (reglas básicas)</h3>
+      <ol class="rules">
+        <li><span>Un punto <strong>fuera</strong> de LSC o LIC.</span></li>
+        <li><span><strong>Racha:</strong> 8 o más puntos seguidos del mismo lado de la línea central.</span></li>
+        <li><span><strong>Tendencia:</strong> 6 o más puntos seguidos subiendo (o bajando) sin interrupción.</span></li>
+        <li><span>Patrones no aleatorios: ciclos, puntos "pegados" a la línea central o alternancia sube-baja sistemática.</span></li>
+      </ol>
+    </div>
+
+    <h3 class="h-sm" style="margin-top:20px">Comprobación rápida</h3>
+    <div class="quiz" id="quiz"></div>
+    <div class="btnrow"><button class="btn" id="quizCheck">Revisar respuestas</button></div>
+    <div class="feedback" id="quizFb" role="status"></div>
+  </section>
+
+  <!-- ================= 05·B VARIABLES ================= -->
+  <section class="block" id="variables">
+    <div class="block-head"><span class="block-num">05·B</span><h2 class="h-md">¿Quién depende de quién?</h2></div>
+    <p class="hint">Antes de graficar hay que decidir qué va en cada eje. Para cada par de variables que surgió en las entrevistas
+    de planta, elijan cuál es la <strong>independiente (X)</strong> y qué <strong>tipo de relación</strong> esperan encontrar.</p>
+    <div class="table-scroll">
+      <table class="vars" id="varsTable">
+        <caption>Pares de variables observadas en la planta Q-LAB</caption>
+        <thead><tr><th>#</th><th>Variable A</th><th>Variable B</th><th>Independiente (X)</th><th>Relación esperada</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="btnrow"><button class="btn" id="varsCheck">Revisar clasificación</button><button class="btn sec" id="varsReset">Reiniciar</button></div>
+    <div class="feedback" id="varsFb" role="status"></div>
+    <div class="card" style="margin-top:14px">
+      <label class="lbl" for="vQ1">1. Un analista encontró que, en verano, sube tanto la venta de helados en la cafetería como el número de carcasas deformadas. ¿Los helados causan defectos? ¿Qué tercera variable podría explicar ambas?</label>
+      <textarea id="vQ1" data-save></textarea>
+    </div>
+  </section>
+
+  <!-- ================= 05·C DISPERSIÓN ================= -->
+  <section class="block" id="dispersion">
+    <div class="block-head"><span class="block-num">05·C</span><h2 class="h-md">Diagrama de dispersión y predicción</h2></div>
+    <p class="hint">Calidad registró durante 16 semanas el <strong>% de piezas fuera de dimensión</strong>. El jefe de producción
+    asegura que "es por la humedad"; el de mantenimiento dice que "el problema crece con el tiempo porque el molde se desgasta".
+    Tienen dos posibles variables X. <strong>¿Cuál explica mejor el problema?</strong></p>
+
+    <div class="tool">
+      <div>
+        <div class="table-scroll">
+          <table id="dispTable">
+            <caption>Registro semanal · carcasa CX-200</caption>
+            <thead><tr><th class="num">Semana</th><th class="num">Humedad rel. %</th><th class="num">% fuera dim.</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <details class="raw no-print" style="margin-top:10px">
+          <summary>¿Cómo se calculan m, b, r y R²?</summary>
+          <div style="font-size:13.5px;margin-top:8px">
+            <p style="margin:0 0 6px"><strong>En Excel</strong> (Y = columna % fuera dim., X = la variable elegida):</p>
+            <div class="formula">=PENDIENTE(Y; X) &nbsp; =INTERSECCION.EJE(Y; X)<br>=COEF.DE.CORREL(Y; X) &nbsp; =COEFICIENTE.R2(Y; X)</div>
+            <p style="margin:0 0 6px"><strong>A mano</strong> (n = 16):</p>
+            <div class="formula">m = [nΣxy − ΣxΣy] / [nΣx² − (Σx)²]<br>b = (Σy − mΣx) / n<br>r = [nΣxy − ΣxΣy] / √{[nΣx² − (Σx)²][nΣy² − (Σy)²]}</div>
+            <div id="sums"></div>
+          </div>
+        </details>
+      </div>
+
+      <div>
+        <div class="controls no-print">
+          <div>
+            <span class="lbl">Variable en el eje X</span>
+            <div class="seg" role="group" aria-label="Variable independiente">
+              <button type="button" data-x="sem" aria-pressed="true">Semana</button>
+              <button type="button" data-x="hum" aria-pressed="false">Humedad relativa</button>
+            </div>
+          </div>
+        </div>
+        <div class="chart">
+          <p class="chart-title" id="scTitle">% fuera de dimensión vs. semana</p>
+          <p class="chart-sub" id="scSub">Cada punto es una semana.</p>
+          <div class="legend">
+            <span><i class="sw" style="background:var(--s-mat);border-radius:50%"></i>Datos observados</span>
+            <span><i class="sw line" style="background:var(--s-mine)"></i>Recta con SUS valores de m y b</span>
+            <span><i class="sw" style="height:0;width:16px;border-top:2px dashed var(--s-ref);border-radius:0"></i>Recta de referencia (tras verificar)</span>
+            <span><i class="sw" style="background:var(--stamp-green);transform:rotate(45deg)"></i>Predicción</span>
+          </div>
+          <svg id="scatter" viewBox="0 0 720 400" role="img" aria-label="Diagrama de dispersión"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Paso 1 · Calculen la recta y la correlación para <span id="calcVar">Semana</span></h3>
+      <p class="hint" style="margin-bottom:10px">Háganlo para <strong>las dos</strong> variables X (cambien el botón de arriba). Usen 4 decimales.</p>
+      <div class="calc">
+        <div><label class="lbl" for="cm">Pendiente m</label><input type="number" step="any" id="cm"></div>
+        <div><label class="lbl" for="cb">Ordenada b</label><input type="number" step="any" id="cb"></div>
+        <div><label class="lbl" for="cr">r</label><input type="number" step="any" id="cr"></div>
+        <div><label class="lbl" for="cr2">R²</label><input type="number" step="any" id="cr2"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="calcCheck">Verificar cálculos</button></div>
+      <div class="feedback" id="calcFb" role="status"></div>
+      <div id="eqBox"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Paso 2 · Predigan con ŷ = m·x + b (usando X = semana)</h3>
+      <p class="hint" style="margin-bottom:10px">La Dirección pide proyectar qué pasará si nadie interviene el molde. Calculen con su ecuación y capturen el resultado (2 decimales).</p>
+      <div class="pred">
+        <div class="row"><label for="p20">a) % fuera de dimensión esperado en la <strong>semana 20</strong></label><input type="number" step="any" id="p20"></div>
+        <div class="row"><label for="p26">b) % fuera de dimensión esperado en la <strong>semana 26</strong> (fin de semestre)</label><input type="number" step="any" id="p26"></div>
+        <div class="row"><label for="pX">c) Elijan un periodo X: <input type="number" id="pXsem" min="17" max="60" value="30" style="width:64px;display:inline-block;font-family:var(--mono)"> → ŷ =</label><input type="number" step="any" id="pX"></div>
+        <div class="row"><label for="p10">d) ¿En qué <strong>semana</strong> se alcanzaría el 10 % de piezas fuera de dimensión? (x = (10 − b)/m)</label><input type="number" step="any" id="p10"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="predCheck">Revisar predicciones</button></div>
+      <div class="feedback" id="predFb" role="status"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Reflexión · dispersión</h3>
+      <div class="grid2">
+        <div><label class="lbl" for="dQ1">2. Comparen el r de "semana" con el de "humedad". ¿Qué dice cada uno sobre la fuerza y dirección de la relación? ¿Quién tenía razón, producción o mantenimiento?</label><textarea id="dQ1" data-save></textarea></div>
+        <div><label class="lbl" for="dQ2">3. Expliquen con sus palabras qué significa el R² que obtuvieron para "semana". ¿Qué porcentaje de la variación queda sin explicar y qué podría causarlo?</label><textarea id="dQ2" data-save></textarea></div>
+        <div><label class="lbl" for="dQ3">4. Interpreten la pendiente m en el contexto de la planta: ¿cuánto empeora el proceso cada semana? ¿Cuánto representa en un mes?</label><textarea id="dQ3" data-save></textarea></div>
+        <div><label class="lbl" for="dQ4">5. ¿Qué tan confiable es su predicción del periodo X que eligieron? ¿Tiene sentido proyectar a la semana 400? ¿Qué supuestos hace la recta que podrían dejar de cumplirse?</label><textarea id="dQ4" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05·D CONTROL ================= -->
+  <section class="block" id="control">
+    <div class="block-head"><span class="block-num">05·D</span><h2 class="h-md">Gráfico de control I-MR</h2></div>
+    <p class="hint">Cada hora se midió la <strong>dimensión crítica</strong> de una carcasa CX-200 (30 lotes consecutivos).
+    El cliente especifica <strong>25.00 ± 0.15 mm</strong> → LEI = 24.85 mm y LES = 25.15 mm.
+    Calculen los rangos móviles, la línea central y los límites de control.</p>
+
+    <div class="tool">
+      <div>
+        <div class="table-scroll" style="max-height:520px;overflow-y:auto">
+          <table id="ctlTable">
+            <caption>Dimensión crítica por lote (mm)</caption>
+            <thead><tr><th class="num">Lote</th><th class="num">x (mm)</th><th class="num">MR</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px">
+          <h3 class="h-sm">Paso 1 · Límites de control</h3>
+          <div class="calc">
+            <div><label class="lbl" for="kx">x̄ (LC)</label><input type="number" step="any" id="kx"></div>
+            <div><label class="lbl" for="kmr">MR̄</label><input type="number" step="any" id="kmr"></div>
+            <div><label class="lbl" for="kucl">LSC</label><input type="number" step="any" id="kucl"></div>
+            <div><label class="lbl" for="klcl">LIC</label><input type="number" step="any" id="klcl"></div>
+          </div>
+          <div class="btnrow no-print">
+            <button class="btn" id="ctlCheck">Verificar límites</button>
+            <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="showMR"> Mostrar columna MR</label>
+          </div>
+          <div class="feedback" id="ctlFb" role="status"></div>
+        </div>
+        <div class="chart">
+          <p class="chart-title">Gráfico de individuales · dimensión crítica</p>
+          <p class="chart-sub">Los límites de control se dibujan con los valores que ustedes capturen.</p>
+          <div class="legend">
+            <span><i class="sw" style="background:var(--s-mat);border-radius:50%"></i>Medición</span>
+            <span><i class="sw line" style="background:var(--ink)"></i>LC</span>
+            <span><i class="sw" style="height:0;width:16px;border-top:2px dashed var(--s-ctl);border-radius:0"></i>LSC / LIC (control)</span>
+            <span><i class="sw line" style="background:var(--s-spec)"></i>LES / LEI (cliente)</span>
+          </div>
+          <svg id="ichart" viewBox="0 0 720 360" role="img" aria-label="Gráfico de control de individuales"></svg>
+          <p class="chart-title" style="font-size:14px;margin-top:6px">Rango móvil (MR)</p>
+          <svg id="mrchart" viewBox="0 0 720 170" role="img" aria-label="Gráfico de rangos móviles"></svg>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h-sm" style="margin-top:20px">Paso 2 · ¿Qué señales ven?</h3>
+    <div class="signals" id="signals">
+      <div class="item" id="sg1">
+        <label class="lbl" for="sOutCtl">a) Lotes fuera de los límites de CONTROL (sepárenlos con comas)</label>
+        <input type="text" id="sOutCtl" data-save placeholder="Ej. 4, 17">
+      </div>
+      <div class="item" id="sg2">
+        <label class="lbl" for="sOutSpec">b) Lotes fuera de ESPECIFICACIÓN del cliente</label>
+        <input type="text" id="sOutSpec" data-save placeholder="Ej. 12">
+      </div>
+      <div class="item" id="sg3">
+        <span class="lbl">c) ¿Hay una TENDENCIA (6 o más puntos seguidos subiendo)?</span>
+        <div class="radio-row"><label><input type="radio" name="sTrend" value="si"> Sí</label><label><input type="radio" name="sTrend" value="no"> No</label></div>
+        <div class="inline">Del lote <input type="number" id="sTrA" data-save> al lote <input type="number" id="sTrB" data-save></div>
+      </div>
+      <div class="item" id="sg4">
+        <span class="lbl">d) ¿Hay una RACHA (8 o más puntos seguidos del mismo lado de LC)?</span>
+        <div class="radio-row"><label><input type="radio" name="sRun" value="si"> Sí</label><label><input type="radio" name="sRun" value="no"> No</label></div>
+        <div class="inline">Del lote <input type="number" id="sRuA" data-save> al lote <input type="number" id="sRuB" data-save></div>
+      </div>
+    </div>
+    <div class="btnrow no-print"><button class="btn" id="sigCheck">Revisar señales</button><button class="btn sec" id="sigShow">Resaltar señales en la gráfica</button></div>
+    <div class="feedback" id="sigFb" role="status"></div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="h-sm">Reflexión · control</h3>
+      <div class="grid2">
+        <div><label class="lbl" for="cQ1">6. ¿El proceso está bajo control estadístico? ¿Cumple con el cliente? Expliquen la diferencia usando lo que ven en la gráfica.</label><textarea id="cQ1" data-save></textarea></div>
+        <div><label class="lbl" for="cQ2">7. Hubo lotes fuera de control que aún estaban dentro de especificación. ¿Por qué es valioso detectarlos <em>antes</em> de que el cliente los rechace?</label><textarea id="cQ2" data-save></textarea></div>
+        <div><label class="lbl" for="cQ3">8. ¿Qué causa asignable podría explicar la tendencia? Relaciónenla con lo que encontraron en el diagrama de dispersión (05·C).</label><textarea id="cQ3" data-save></textarea></div>
+        <div><label class="lbl" for="cQ4">9. Los límites se calcularon con los 30 lotes, incluidos los que tienen causas especiales. ¿Qué pasaría con la LC y los límites si sólo usaran los lotes 1–14 (proceso estable)? ¿Cuál sería más útil para vigilar?</label><textarea id="cQ4" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05·E DECISIÓN ================= -->
+  <section class="block" id="decision">
+    <div class="block-head"><span class="block-num">05·E</span><h2 class="h-md">Informe a la Dirección</h2></div>
+    <div class="memo">
+      <label class="lbl" for="dec">En máximo 6 líneas respondan las dos preguntas de la Dirección: ¿el problema va a empeorar (con cifras de su predicción)? ¿el proceso está bajo control y cumple al cliente? Propongan una acción inmediata.</label>
+      <textarea id="dec" data-save style="min-height:130px"></textarea>
+    </div>
+
+    <div class="card deliver no-print" style="margin-top:16px">
+      <h3 class="h-sm">Cómo entregar en Canvas</h3>
+      <ol>
+        <li>Revisen que estén los nombres de todos los integrantes y todas las respuestas.</li>
+        <li>Presionen <strong>Guardar reporte en PDF</strong>. En la ventana de impresión elijan como destino <strong>"Guardar como PDF"</strong>.</li>
+        <li>En "Más opciones" activen <strong>Gráficos de fondo</strong> para que se vean los colores de las gráficas.</li>
+        <li>Nombren el archivo <code>S05_Equipo#_QLAB.pdf</code> y súbanlo a la tarea de Canvas (una entrega por equipo).</li>
+      </ol>
+    </div>
+    <div class="btnrow">
+      <button class="btn dark" id="printBtn">Guardar reporte en PDF</button>
+      <button class="btn sec" id="clearAll">Borrar todas mis respuestas</button>
+    </div>
+    <p class="print-head" id="printStamp"></p>
+  </section>
+
+  <div class="pager">
+    <a href="semana-04.html">← Semana 4 — Pareto</a>
+    <span class="is-disabled">Semana 6 — Próximamente →</span>
+  </div>
+</main>
+
+<footer class="site">Q-LAB 360 — Sistemas y Aseguramiento de la Calidad</footer>
+<script>
+(function(){
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const el=(tag,attrs={},parent)=>{const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.appendChild(n);return n;};
+const txt=(parent,x,y,s,attrs={})=>{const t=el('text',Object.assign({x,y},attrs),parent);t.textContent=s;return t;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=(n,d=2)=>Number(n).toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
+const num=v=>{if(v===''||v==null)return NaN;return parseFloat(String(v).replace(',','.'));};
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* ---------- almacenamiento (tolerante a fallos) ---------- */
+const KEY='qlab-s5-v1';
+let store={};
+try{store=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){store={};}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}};
+$$('[data-save]').forEach(n=>{
+  if(store['f_'+n.id]!=null)n.value=store['f_'+n.id];
+  n.addEventListener('input',()=>{store['f_'+n.id]=n.value;save();});
+});
+
+/* ---------- estadística ---------- */
+function linreg(x,y){
+  const n=x.length;let sx=0,sy=0,sxy=0,sxx=0,syy=0;
+  for(let i=0;i<n;i++){sx+=x[i];sy+=y[i];sxy+=x[i]*y[i];sxx+=x[i]*x[i];syy+=y[i]*y[i];}
+  const m=(n*sxy-sx*sy)/(n*sxx-sx*sx);const b=(sy-m*sx)/n;
+  const r=(n*sxy-sx*sy)/Math.sqrt((n*sxx-sx*sx)*(n*syy-sy*sy));
+  return {n,sx,sy,sxy,sxx,syy,m,b,r,r2:r*r};
+}
+
+/* ================= 05·A MINIATURAS Y ESQUEMA ================= */
+(function thumbs(){
+  const box=$('#thumbs');
+  const kinds=[['Positiva',1],['Negativa',-1],['Sin relación',0]];
+  let seed=3;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
+  kinds.forEach(([lab,s])=>{
+    const f=document.createElement('figure');
+    const svg=el('svg',{viewBox:'0 0 120 80','aria-hidden':'true'});
+    el('line',{x1:10,y1:72,x2:114,y2:72,stroke:'#5B5D52','stroke-width':1},svg);
+    el('line',{x1:10,y1:72,x2:10,y2:6,stroke:'#5B5D52','stroke-width':1},svg);
+    for(let i=0;i<16;i++){
+      const x=16+rnd()*92;let y;
+      if(s===0)y=12+rnd()*54;else{const t=(x-16)/92;y=(s>0?66-t*50:16+t*50)+(rnd()-.5)*16;}
+      el('circle',{cx:x,cy:y,r:3,fill:'#0F74A8'},svg);
+    }
+    if(s!==0)el('line',{x1:16,y1:s>0?66:16,x2:108,y2:s>0?16:66,stroke:'#21241F','stroke-width':1.3,'stroke-dasharray':'4 3'},svg);
+    f.appendChild(svg);const c=document.createElement('figcaption');
+    c.textContent=lab+(s>0?' · r > 0':s<0?' · r < 0':' · r ≈ 0');f.appendChild(c);box.appendChild(f);
+  });
+})();
+(function schema(){
+  const svg=$('#ctlSchema');const W=420,y=v=>85-v*14;
+  const pts=[0.2,-0.6,0.5,-0.3,0.9,-1.1,0.4,0.1,-0.4,1.2,1.6,2.0,2.4,3.4,1.8];
+  const lines=[[3,'LES (cliente)','#A8402F','',3.9],[2.6,'LSC','#2B5C6B','5 4'],[0,'LC','#21241F',''],[-2.6,'LIC','#2B5C6B','5 4'],[-3,'LEI (cliente)','#A8402F','',-3.9]];
+  lines.forEach(([v,l,c,d,lv])=>{
+    const yy=y(lv!=null?lv:v);
+    el('line',{x1:20,y1:yy,x2:330,y2:yy,stroke:c,'stroke-width':1.5,'stroke-dasharray':d},svg);
+    txt(svg,336,yy+4,l,{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:c});
+  });
+  let p='';pts.forEach((v,i)=>{p+=(i?'L':'M')+(30+i*20)+','+y(v);});
+  el('path',{d:p,fill:'none',stroke:'#0F74A8','stroke-width':1.4},svg);
+  pts.forEach((v,i)=>{const out=v>2.6||v<-2.6;el('circle',{cx:30+i*20,cy:y(v),r:out?5:3.4,fill:out?'#A8402F':'#0F74A8'},svg);});
+  txt(svg,30+13*20-6,y(3.4)-9,'causa especial',{'font-family':'IBM Plex Sans, sans-serif','font-size':10.5,fill:'#A8402F','text-anchor':'end'});
+  el('rect',{x:30+9*20-8,y:y(2.6)+4,width:4*20+16,height:y(1.2)-y(2.6)+16,fill:'none',stroke:'#C9831A','stroke-width':1.2,'stroke-dasharray':'3 3',rx:4},svg);
+  txt(svg,30+9*20-8,y(1.2)+34,'tendencia ↗',{'font-family':'IBM Plex Sans, sans-serif','font-size':10.5,fill:'#8a5a0f'});
+})();
+
+/* ================= QUIZ ================= */
+const QUIZ=[
+  {p:'Entre horas de capacitación (X) y defectos por turno (Y) se obtuvo r = −0.92. Esto significa que…',o:['La relación es débil porque r es negativo','Hay una relación fuerte: a más capacitación, menos defectos','La capacitación causa el 92 % de los defectos','No se puede interpretar porque r debe ser positivo'],a:1,w:'El signo indica la dirección (negativa: cuando X sube, Y baja) y |r| = 0.92 indica relación fuerte. r no es un porcentaje y no prueba causalidad.'},
+  {p:'Un modelo tiene R² = 0.64. ¿Qué significa?',o:['El 64 % de la variación de Y se explica por X','La pendiente vale 0.64','El 64 % de los datos están sobre la recta','r = 0.64'],a:0,w:'R² es la proporción de la variación de Y explicada por X. En este caso r = ±0.8 (√0.64).'},
+  {p:'Un punto está DENTRO de especificación pero ARRIBA del LSC. ¿Qué hacen?',o:['Nada: el cliente lo acepta','Recalcular los límites para que el punto quede dentro','Investigar: es señal de una causa especial en el proceso','Desechar la pieza'],a:2,w:'Los límites de control hablan del proceso, no de la pieza. El punto avisa que algo cambió aunque la pieza todavía cumpla.'},
+  {p:'¿Quién define los límites de control?',o:['El cliente, en el contrato','El ingeniero de diseño en el plano','La norma ISO 9001','Los propios datos del proceso'],a:3,w:'Los límites de control se calculan con la variación natural del proceso (x̄ ± 3σ). Los de especificación los define el cliente o el diseño.'}
+];
+const quizBox=$('#quiz');
+QUIZ.forEach((q,i)=>{
+  const d=document.createElement('div');d.className='q';d.id='q'+i;
+  d.innerHTML='<p>'+(i+1)+'. '+esc(q.p)+'</p>'+q.o.map((o,j)=>'<label><input type="radio" name="qz'+i+'" value="'+j+'"'+(store['qz'+i]==j?' checked':'')+'> '+esc(o)+'</label>').join('')+'<div class="why">'+esc(q.w)+'</div>';
+  quizBox.appendChild(d);
+  d.querySelectorAll('input').forEach(r=>r.addEventListener('change',()=>{store['qz'+i]=r.value;save();d.classList.remove('right','wrong');}));
+});
+$('#quizCheck').addEventListener('click',()=>{
+  let ok=0,blank=0;QUIZ.forEach((q,i)=>{const d=$('#q'+i);d.classList.remove('right','wrong');const v=store['qz'+i];if(v==null){blank++;return;}const r=+v===q.a;d.classList.add(r?'right':'wrong');if(r)ok++;});
+  const fb=$('#quizFb');fb.className='feedback show '+(ok===QUIZ.length?'good':'warn');
+  fb.textContent=ok===QUIZ.length?'¡4 de 4! Ya tienen las bases para analizar los datos.':ok+' de '+QUIZ.length+' correctas'+(blank?' ('+blank+' sin responder)':'')+'. Lean la explicación de cada pregunta marcada en rojo.';
+});
+
+/* ================= 05·B VARIABLES ================= */
+const VARS=[
+  {a:'Dimensión de la carcasa (mm)',b:'Temperatura del molde (°C)',x:'b',r:'pos',w:'La temperatura se controla y provoca dilatación del material; la dimensión es el resultado.'},
+  {a:'Horas de capacitación del operador',b:'Defectos por turno',x:'a',r:'neg',w:'La capacitación se decide antes; los defectos responden. A más capacitación se esperan menos defectos.'},
+  {a:'Costo de retrabajo semanal ($)',b:'Piezas defectuosas por semana',x:'b',r:'pos',w:'Cada pieza defectuosa genera costo: el costo depende de la cantidad de defectos.'},
+  {a:'Velocidad de la línea (piezas/min)',b:'% de piezas con rebaba',x:'a',r:'pos',w:'La velocidad es un parámetro que se ajusta; al acelerar se reduce el tiempo de enfriamiento y aumenta la rebaba.'},
+  {a:'Desgaste del herramental (mm)',b:'Días desde el último mantenimiento',x:'b',r:'pos',w:'El tiempo transcurre independientemente; el desgaste se acumula conforme pasan los días.'},
+  {a:'Tiempo de entrega al cliente (días)',b:'Satisfacción del cliente (1–10)',x:'a',r:'neg',w:'La satisfacción responde a la experiencia; entregas más largas suelen bajarla.'},
+  {a:'Burbujas por pieza',b:'Humedad de la resina (%)',x:'b',r:'pos',w:'La humedad de la materia prima se evapora al inyectar y genera burbujas.'},
+  {a:'Inspecciones de calidad por turno',b:'Defectos que llegan al cliente',x:'a',r:'neg',w:'Más inspecciones detectan más defectos antes de embarcar, así que llegan menos al cliente.'}
+];
+let vState=store.vState||{};
+const vtb=$('#varsTable tbody');
+function renderVars(){
+  vtb.innerHTML='';
+  VARS.forEach((v,i)=>{
+    const s=vState[i]||{};
+    const tr=document.createElement('tr');tr.id='vr'+i;
+    tr.innerHTML='<td class="num">'+(i+1)+'</td><td>'+esc(v.a)+'</td><td>'+esc(v.b)+'</td>'+
+      '<td><select data-k="x" aria-label="Variable independiente del par '+(i+1)+'"><option value="">— elegir —</option><option value="a">'+esc(v.a)+'</option><option value="b">'+esc(v.b)+'</option></select></td>'+
+      '<td><select data-k="r" aria-label="Relación esperada del par '+(i+1)+'"><option value="">— elegir —</option><option value="pos">Positiva (+)</option><option value="neg">Negativa (−)</option><option value="none">Sin relación</option></select><div class="vy" id="vw'+i+'" hidden></div></td>';
+    vtb.appendChild(tr);
+    tr.querySelectorAll('select').forEach(sel=>{
+      sel.value=s[sel.dataset.k]||'';
+      sel.addEventListener('change',()=>{vState[i]=vState[i]||{};vState[i][sel.dataset.k]=sel.value;store.vState=vState;save();tr.classList.remove('right','wrong');$('#vw'+i).hidden=true;});
+    });
+  });
+}
+renderVars();
+$('#varsCheck').addEventListener('click',()=>{
+  let ok=0,blank=0;
+  VARS.forEach((v,i)=>{const s=vState[i]||{};const tr=$('#vr'+i);tr.classList.remove('right','wrong');const w=$('#vw'+i);w.hidden=true;
+    if(!s.x||!s.r){blank++;return;}
+    const r=s.x===v.x&&s.r===v.r;tr.classList.add(r?'right':'wrong');if(r)ok++;
+    if(!r){w.hidden=false;w.textContent=(s.x!==v.x?'Revisen X. ':'')+(s.r!==v.r?'Revisen el signo. ':'')+'Pista: '+v.w;}
+  });
+  const fb=$('#varsFb');fb.className='feedback show '+(ok===VARS.length?'good':'warn');
+  fb.textContent=ok===VARS.length?'¡Clasificación perfecta! Recuerden la regla: X es la que se controla o ocurre primero; Y es la que responde.':
+    ok+' de '+VARS.length+' correctas'+(blank?' ('+blank+' incompletas)':'')+'. Pregúntense: ¿cuál puedo ajustar o sucede primero? Esa es X.';
+});
+$('#varsReset').addEventListener('click',()=>{vState={};store.vState=vState;save();renderVars();$('#varsFb').className='feedback';});
+
+/* ================= 05·C DISPERSIÓN ================= */
+const SEM=Array.from({length:16},(_,i)=>i+1);
+const HUM=[48,62,55,71,44,58,66,52,60,49,69,57,63,46,54,61];
+const PCT=[2.33,3.30,3.54,2.98,3.40,3.60,4.45,4.45,5.16,4.18,6.19,5.67,6.37,6.27,6.46,7.19];
+const REG={sem:linreg(SEM,PCT),hum:linreg(HUM,PCT)};
+const XLAB={sem:'Semana',hum:'Humedad relativa (%)'};
+let curX=store.curX||'sem';
+store.calc=store.calc||{sem:{},hum:{}};
+store.checked=store.checked||{};
+
+const dtb=$('#dispTable tbody');
+SEM.forEach((s,i)=>{const tr=document.createElement('tr');tr.innerHTML='<td class="num">'+s+'</td><td class="num">'+HUM[i]+'</td><td class="num">'+fmt(PCT[i],2)+'</td>';dtb.appendChild(tr);});
+function renderSums(){
+  const R=REG[curX];
+  $('#sums').innerHTML='<table style="margin-top:6px"><caption>Sumatorias con X = '+esc(XLAB[curX])+'</caption><tbody>'+
+    [['n',R.n],['Σx',R.sx],['Σy',R.sy],['Σxy',R.sxy],['Σx²',R.sxx],['Σy²',R.syy]].map(([k,v])=>'<tr><td>'+k+'</td><td class="num">'+fmt(v,k==='n'?0:4)+'</td></tr>').join('')+'</tbody></table>';
+}
+
+const CALC=['cm','cb','cr','cr2'];const CK={cm:'m',cb:'b',cr:'r',cr2:'r2'};
+function loadCalc(){CALC.forEach(id=>{const v=store.calc[curX][CK[id]];$('#'+id).value=v!=null?v:'';$('#'+id).classList.remove('ok','bad');});$('#calcFb').className='feedback';renderEq();}
+CALC.forEach(id=>$('#'+id).addEventListener('input',e=>{store.calc[curX][CK[id]]=e.target.value;save();e.target.classList.remove('ok','bad');drawScatter();renderEq();}));
+
+function renderEq(){
+  const c=store.calc[curX];const m=num(c.m),b=num(c.b);
+  $('#eqBox').innerHTML=isFinite(m)&&isFinite(b)?'<span class="eq">Su ecuación: ŷ = <b>'+fmt(m,4)+'</b>·x '+(b<0?'− ':'+ ')+'<b>'+fmt(Math.abs(b),4)+'</b></span>':'';
+}
+
+const TOL={m:0.002,b:0.02,r:0.005,r2:0.005};
+$('#calcCheck').addEventListener('click',()=>{
+  const R=REG[curX];let ok=0,blank=0;const bad=[];
+  CALC.forEach(id=>{const k=CK[id];const inp=$('#'+id);inp.classList.remove('ok','bad');const v=num(inp.value);
+    if(!isFinite(v)){blank++;return;}const r=Math.abs(v-R[k])<=TOL[k];inp.classList.add(r?'ok':'bad');if(r)ok++;else bad.push(k);});
+  store.checked[curX]=true;save();drawScatter();
+  const fb=$('#calcFb');fb.className='feedback show '+(ok===4?'good':'warn');
+  if(ok===4){
+    fb.innerHTML='<strong>¡Correcto!</strong> La recta punteada es la de referencia y coincide con la suya. '+
+      (curX==='sem'?'Ahora cambien el eje X a <strong>Humedad relativa</strong> y repitan el cálculo para comparar.':'Comparen este r con el de la semana: ¿cuál variable explica mejor el problema?');
+  }else{
+    let hint='';
+    if(bad.includes('r')&&!bad.includes('r2'))hint=' Revisen el signo de r: ¿la nube sube o baja?';
+    else if(bad.includes('r2'))hint=' Recuerden: R² = r × r.';
+    else if(bad.includes('b'))hint=' b = (Σy − m·Σx)/n; usen m con 4 decimales.';
+    else if(bad.includes('m'))hint=' ¿Pusieron X y Y en el orden correcto en PENDIENTE(Y; X)?';
+    fb.textContent=ok+' de 4 correctos'+(blank?' ('+blank+' vacíos)':'')+'.'+hint+' La recta punteada muestra la referencia para que comparen visualmente.';
+  }
+});
+
+$$('.seg [data-x]').forEach(b=>b.addEventListener('click',()=>{
+  curX=b.dataset.x;store.curX=curX;save();
+  $$('.seg [data-x]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  $('#calcVar').textContent=curX==='sem'?'Semana':'Humedad relativa';
+  loadCalc();renderSums();drawScatter();
+}));
+
+/* ---- predicciones ---- */
+const PRED=['p20','p26','pX','p10'];
+PRED.concat(['pXsem']).forEach(id=>{const n=$('#'+id);if(store['f_'+id]!=null)n.value=store['f_'+id];n.addEventListener('input',()=>{store['f_'+id]=n.value;n.classList.remove('ok','bad');save();});});
+let predShown=!!store.predShown;
+function predTargets(){const R=REG.sem;const xs=Math.round(num($('#pXsem').value))||30;
+  return {p20:{x:20,y:R.m*20+R.b},p26:{x:26,y:R.m*26+R.b},pX:{x:xs,y:R.m*xs+R.b},p10:{x:(10-R.b)/R.m,y:10}};}
+$('#predCheck').addEventListener('click',()=>{
+  const T=predTargets();let ok=0,blank=0;
+  PRED.forEach(id=>{const inp=$('#'+id);inp.classList.remove('ok','bad');const v=num(inp.value);if(!isFinite(v)){blank++;return;}
+    const tgt=id==='p10'?T[id].x:T[id].y;const r=Math.abs(v-tgt)<=(id==='p10'?0.35:Math.max(0.06,Math.abs(tgt)*0.01));inp.classList.add(r?'ok':'bad');if(r)ok++;});
+  predShown=true;store.predShown=true;save();drawScatter();
+  const fb=$('#predFb');fb.className='feedback show '+(ok===4?'good':'warn');
+  if(ok===4){
+    const xs=T.pX.x;
+    fb.innerHTML='<strong>¡Predicciones correctas!</strong> Están marcadas con rombos verdes en la gráfica. Antes de entregarlas a la Dirección, piénsenlo: '+
+      'la zona sombreada es <strong>extrapolación</strong> (fuera de las 16 semanas observadas). Si siguieran la recta a la semana 400 obtendrían '+fmt(REG.sem.m*400+REG.sem.b,0)+
+      ' % de piezas fuera de dimensión: ¡más del 100 %, algo imposible! ¿Hasta dónde confían en la recta?';
+  }else{
+    fb.textContent=ok+' de 4 correctas'+(blank?' ('+blank+' vacías)':'')+'. Usen m y b de "Semana" (no de humedad) y sustituyan: ŷ = m·x + b. Para el inciso d) despejen x.';
+  }
+});
+$('#pXsem').addEventListener('input',()=>{$('#pX').classList.remove('ok','bad');drawScatter();});
+
+/* ---- dibujo del diagrama de dispersión ---- */
+function niceTicks(a,b,n){const span=b-a;const step0=span/n;const mag=Math.pow(10,Math.floor(Math.log10(step0)));const r=step0/mag;const step=(r<1.5?1:r<3?2:r<7?5:10)*mag;
+  const t=[];for(let v=Math.ceil(a/step)*step;v<=b+1e-9;v+=step)t.push(+v.toFixed(6));return t;}
+function drawScatter(){
+  const svg=$('#scatter');svg.innerHTML='';
+  const W=720,H=400,P={l:56,r:18,t:16,b:48};
+  const xs=curX==='sem'?SEM:HUM;
+  const T=predTargets();
+  let xmin,xmax,ymin=0,ymax=10;
+  if(curX==='sem'){xmin=0;xmax=Math.max(30,predShown?Math.min(60,Math.ceil(T.pX.x/5)*5+2):30);ymax=Math.max(12,predShown?Math.ceil((T.pX.y+1)/2)*2:12);}
+  else{xmin=40;xmax=75;}
+  const sx=v=>P.l+(v-xmin)/(xmax-xmin)*(W-P.l-P.r);
+  const sy=v=>H-P.b-(v-ymin)/(ymax-ymin)*(H-P.t-P.b);
+  const clip='clipSc';const defs=el('defs',{},svg);const cp=el('clipPath',{id:clip},defs);el('rect',{x:P.l,y:P.t,width:W-P.l-P.r,height:H-P.t-P.b},cp);
+  // zona de extrapolación
+  if(curX==='sem'){el('rect',{x:sx(16.5),y:P.t,width:sx(xmax)-sx(16.5),height:H-P.t-P.b,fill:'#E4DFD1',opacity:.55},svg);
+    txt(svg,sx(16.5)+8,P.t+16,'Zona de extrapolación (no observada)',{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#5B5D52'});}
+  const g=el('g',{class:'grid'},svg),ax=el('g',{class:'axis'},svg);
+  niceTicks(ymin,ymax,6).forEach(v=>{el('line',{x1:P.l,x2:W-P.r,y1:sy(v),y2:sy(v)},g);txt(ax,P.l-8,sy(v)+4,fmt(v,0)+' %',{'text-anchor':'end'});});
+  niceTicks(xmin,xmax,8).forEach(v=>{el('line',{x1:sx(v),x2:sx(v),y1:P.t,y2:H-P.b},g);txt(ax,sx(v),H-P.b+16,fmt(v,0),{'text-anchor':'middle'});});
+  el('line',{x1:P.l,x2:W-P.r,y1:H-P.b,y2:H-P.b,stroke:'#21241F'},svg);el('line',{x1:P.l,x2:P.l,y1:P.t,y2:H-P.b,stroke:'#21241F'},svg);
+  txt(svg,(P.l+W-P.r)/2,H-8,XLAB[curX]+' (X)',{'text-anchor':'middle','font-family':'IBM Plex Sans, sans-serif','font-size':12.5,fill:'#21241F'});
+  const yl=txt(svg,14,(P.t+H-P.b)/2,'% fuera de dimensión (Y)',{'text-anchor':'middle','font-family':'IBM Plex Sans, sans-serif','font-size':12.5,fill:'#21241F'});yl.setAttribute('transform','rotate(-90 14 '+((P.t+H-P.b)/2)+')');
+  const lines=el('g',{'clip-path':'url(#'+clip+')'},svg);
+  // recta de referencia
+  if(store.checked[curX]){const R=REG[curX];el('line',{x1:sx(xmin),y1:sy(R.m*xmin+R.b),x2:sx(xmax),y2:sy(R.m*xmax+R.b),stroke:'#21241F','stroke-width':1.6,'stroke-dasharray':'6 4'},lines);}
+  // recta del equipo
+  const c=store.calc[curX];const m=num(c.m),b=num(c.b);
+  if(isFinite(m)&&isFinite(b))el('line',{x1:sx(xmin),y1:sy(m*xmin+b),x2:sx(xmax),y2:sy(m*xmax+b),stroke:'#C9831A','stroke-width':2.6,opacity:.9},lines);
+  // puntos
+  xs.forEach((x,i)=>{const cc=el('circle',{cx:sx(x),cy:sy(PCT[i]),r:5.5,fill:'#0F74A8',stroke:'#FAF8F2','stroke-width':1.5},svg);
+    el('title',{},cc).textContent=(curX==='sem'?'Semana ':'Humedad ')+x+(curX==='sem'?'':' %')+' → '+fmt(PCT[i],2)+' % fuera de dimensión';});
+  // predicciones
+  if(curX==='sem'&&predShown){
+    ['p20','p26','pX'].forEach(id=>{const v=num($('#'+id).value);const x=T[id].x;if(!isFinite(v))return;
+      const px=sx(x),py=sy(v);if(px>W-P.r||py<P.t)return;
+      el('line',{x1:px,x2:px,y1:py,y2:H-P.b,stroke:'#4C7A52','stroke-width':1,'stroke-dasharray':'2 3'},svg);
+      el('rect',{x:px-6,y:py-6,width:12,height:12,fill:'#4C7A52',transform:'rotate(45 '+px+' '+py+')'},svg);
+      txt(svg,px,py-11,'sem '+x+': '+fmt(v,2)+' %',{'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#2f5434'});
+    });
+    const v10=num($('#p10').value);if(isFinite(v10)&&sx(v10)<W-P.r){el('line',{x1:P.l,x2:sx(v10),y1:sy(10),y2:sy(10),stroke:'#4C7A52','stroke-width':1,'stroke-dasharray':'2 3'},svg);
+      txt(svg,P.l+6,sy(10)-5,'10 % → semana '+fmt(v10,1),{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#2f5434'});}
+  }
+  // r en la esquina si ya verificó
+  if(store.checked[curX]){const R=REG[curX];const bx=curX==='sem'?P.l+10:W-P.r-170;
+    el('rect',{x:bx,y:P.t+(curX==='sem'?28:8),width:160,height:40,rx:3,fill:'#21241F',opacity:.9},svg);
+    txt(svg,bx+10,P.t+(curX==='sem'?44:24),'r = '+fmt(R.r,4),{'font-family':'IBM Plex Mono, monospace','font-size':12,fill:'#EFEBE1'});
+    txt(svg,bx+10,P.t+(curX==='sem'?60:40),'R² = '+fmt(R.r2,4),{'font-family':'IBM Plex Mono, monospace','font-size':12,fill:'#E1A234'});}
+  $('#scTitle').textContent='% fuera de dimensión vs. '+(curX==='sem'?'semana':'humedad relativa');
+  $('#scSub').textContent=curX==='sem'?'Cada punto es una semana. La zona gris es el futuro: ahí la recta sólo es una proyección.':'Cada punto es una semana, ahora ordenada por la humedad registrada.';
+}
+
+/* ================= 05·D CONTROL ================= */
+const D=[24.99,25.02,24.97,25.01,25.03,24.98,25.00,24.98,25.02,24.99,25.01,24.97,25.00,25.02,25.01,25.03,25.05,25.06,25.08,25.10,25.12,25.17,25.11,25.09,25.14,25.10,25.16,25.11,25.13,25.10];
+const LES=25.15,LEI=24.85;
+const MR=D.map((v,i)=>i?Math.abs(v-D[i-1]):null);
+const XBAR=D.reduce((a,b)=>a+b,0)/D.length;
+const MRBAR=MR.slice(1).reduce((a,b)=>a+b,0)/(D.length-1);
+const UCL=XBAR+2.66*MRBAR,LCL=XBAR-2.66*MRBAR;
+// señales de referencia
+const OUTCTL=D.map((v,i)=>v>UCL||v<LCL?i+1:0).filter(Boolean);
+const OUTSPEC=D.map((v,i)=>v>LES||v<LEI?i+1:0).filter(Boolean);
+function longestUp(){let best=[1,1],s=0;for(let i=1;i<D.length;i++){if(D[i]>D[i-1]){if(i-s+1>best[1]-best[0]+1)best=[s+1,i+1];}else s=i;}return best;}
+const TREND=longestUp();
+function runs(){const out=[];let s=0;const side=v=>v>XBAR?1:v<XBAR?-1:0;for(let i=1;i<=D.length;i++){if(i===D.length||side(D[i])!==side(D[s])){if(i-s>=8)out.push([s+1,i,side(D[s])]);s=i;}}return out;}
+const RUNS=runs();
+
+const ctb=$('#ctlTable tbody');
+D.forEach((v,i)=>{const tr=document.createElement('tr');tr.innerHTML='<td class="num">'+(i+1)+'</td><td class="num">'+v.toFixed(2)+'</td><td class="num mrc">'+(i?'<span class="mrv">'+MR[i].toFixed(2)+'</span>':'—')+'</td>';ctb.appendChild(tr);});
+function toggleMR(){$$('.mrv').forEach(s=>s.style.visibility=$('#showMR').checked?'visible':'hidden');}
+$('#showMR').checked=!!store.showMR;toggleMR();
+$('#showMR').addEventListener('change',()=>{store.showMR=$('#showMR').checked;save();toggleMR();});
+
+const CTL={kx:XBAR,kmr:MRBAR,kucl:UCL,klcl:LCL};
+Object.keys(CTL).forEach(id=>{const n=$('#'+id);if(store['f_'+id]!=null)n.value=store['f_'+id];n.addEventListener('input',()=>{store['f_'+id]=n.value;n.classList.remove('ok','bad');save();drawControl();});});
+$('#ctlCheck').addEventListener('click',()=>{
+  let ok=0,blank=0;const bad=[];
+  Object.keys(CTL).forEach(id=>{const n=$('#'+id);n.classList.remove('ok','bad');const v=num(n.value);if(!isFinite(v)){blank++;return;}
+    const r=Math.abs(v-CTL[id])<=(id==='kmr'?0.0015:id==='kx'?0.0015:0.004);n.classList.add(r?'ok':'bad');if(r)ok++;else bad.push(id);});
+  const fb=$('#ctlFb');fb.className='feedback show '+(ok===4?'good':'warn');
+  if(ok===4)fb.innerHTML='<strong>¡Límites correctos!</strong> Observen que los límites de control quedan <em>dentro</em> de los de especificación: el proceso tiene capacidad, pero algo lo está desplazando.';
+  else{let h='';if(bad.includes('kmr'))h=' MR̄ es el promedio de 29 rangos móviles (el lote 1 no tiene MR). Pueden activar "Mostrar columna MR" para revisar.';
+    else if(bad.includes('kx'))h=' x̄ es el promedio de las 30 mediciones.';
+    else h=' LSC = x̄ + 2.66·MR̄ y LIC = x̄ − 2.66·MR̄; usen 4 decimales.';
+    fb.textContent=ok+' de 4 correctos'+(blank?' ('+blank+' vacíos)':'')+'.'+h;}
+});
+
+// radios
+['sTrend','sRun'].forEach(nm=>{$$('input[name='+nm+']').forEach(r=>{if(store[nm]===r.value)r.checked=true;r.addEventListener('change',()=>{store[nm]=r.value;save();});});});
+const parseList=s=>(s||'').split(/[^0-9]+/).filter(Boolean).map(Number).sort((a,b)=>a-b);
+const sameSet=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
+let showSig=!!store.showSig;
+$('#sigCheck').addEventListener('click',()=>{
+  const res=[];const mark=(id,ok)=>{const n=$('#'+id);n.classList.remove('right','wrong');n.classList.add(ok?'right':'wrong');res.push(ok);};
+  const a=parseList($('#sOutCtl').value),b=parseList($('#sOutSpec').value);
+  mark('sg1',sameSet(a,OUTCTL));mark('sg2',sameSet(b,OUTSPEC));
+  const near=(v,t)=>Math.abs(v-t)<=1;
+  const tA=num($('#sTrA').value),tB=num($('#sTrB').value);
+  mark('sg3',store.sTrend==='si'&&near(tA,TREND[0])&&near(tB,TREND[1]));
+  const rA=num($('#sRuA').value),rB=num($('#sRuB').value);
+  mark('sg4',store.sRun==='si'&&RUNS.some(r=>near(rA,r[0])&&near(rB,r[1])));
+  const ok=res.filter(Boolean).length;const fb=$('#sigFb');fb.className='feedback show '+(ok===4?'good':'warn');
+  const msgs=[];
+  if(!res[0])msgs.push('a) Comparen cada punto contra SUS LSC y LIC (no contra los del cliente).');
+  if(!res[1])msgs.push('b) Aquí sí comparen contra 24.85 y 25.15 mm.');
+  if(!res[2])msgs.push('c) Busquen dónde los valores suben lote tras lote sin bajar ni una vez; anoten el primer y el último lote.');
+  if(!res[3])msgs.push('d) Cuenten de qué lado de la LC queda cada punto. ¿Hay 8 o más seguidos del mismo lado?');
+  fb.innerHTML=ok===4?'<strong>¡Las cuatro señales están bien identificadas!</strong> Hay '+RUNS.length+' rachas largas: lotes '+RUNS.map(r=>r[0]+'–'+r[1]).join(' y ')+'. ¿Qué les dice que el proceso haya "cambiado de nivel"? Pulsen "Resaltar señales" y respondan la reflexión.':
+    ok+' de 4 correctas. '+msgs.join(' ');
+});
+$('#sigShow').addEventListener('click',()=>{showSig=!showSig;store.showSig=showSig;save();$('#sigShow').textContent=showSig?'Ocultar señales':'Resaltar señales en la gráfica';drawControl();});
+$('#sigShow').textContent=showSig?'Ocultar señales':'Resaltar señales en la gráfica';
+
+function drawControl(){
+  const svg=$('#ichart');svg.innerHTML='';
+  const W=720,H=360,P={l:58,r:72,t:14,b:40};
+  const ymin=24.80,ymax=25.25;
+  const sx=i=>P.l+(i-0.5)/(D.length)*(W-P.l-P.r);
+  const sy=v=>H-P.b-(v-ymin)/(ymax-ymin)*(H-P.t-P.b);
+  const g=el('g',{class:'grid'},svg),ax=el('g',{class:'axis'},svg);
+  for(let v=24.80;v<=25.2501;v+=0.05){el('line',{x1:P.l,x2:W-P.r,y1:sy(v),y2:sy(v)},g);txt(ax,P.l-8,sy(v)+4,v.toFixed(2),{'text-anchor':'end'});}
+  for(let i=1;i<=D.length;i++){if(i===1||i%5===0)txt(ax,sx(i),H-P.b+16,i,{'text-anchor':'middle'});}
+  txt(svg,(P.l+W-P.r)/2,H-6,'Lote',{'text-anchor':'middle','font-family':'IBM Plex Sans, sans-serif','font-size':12.5,fill:'#21241F'});
+  const yl=txt(svg,14,(P.t+H-P.b)/2,'Dimensión (mm)',{'text-anchor':'middle','font-family':'IBM Plex Sans, sans-serif','font-size':12.5,fill:'#21241F'});yl.setAttribute('transform','rotate(-90 14 '+((P.t+H-P.b)/2)+')');
+  el('line',{x1:P.l,x2:W-P.r,y1:H-P.b,y2:H-P.b,stroke:'#21241F'},svg);el('line',{x1:P.l,x2:P.l,y1:P.t,y2:H-P.b,stroke:'#21241F'},svg);
+  const label=(v,l,c,dy=4)=>txt(svg,W-P.r+6,sy(v)+dy,l,{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:c});
+  // señales: sombreado
+  if(showSig){
+    el('rect',{x:sx(TREND[0])-8,y:P.t,width:sx(TREND[1])-sx(TREND[0])+16,height:H-P.t-P.b,fill:'#E1A234',opacity:.16},svg);
+    txt(svg,sx(TREND[0])-4,sy(24.92),'Tendencia ↗ ('+(TREND[1]-TREND[0]+1)+' pts)',{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#8a5a0f'});
+    RUNS.forEach(r=>{const yy=r[2]>0?P.t+14:H-P.b-10;el('line',{x1:sx(r[0]),x2:sx(r[1]),y1:yy,y2:yy,stroke:'#5B5D52','stroke-width':2,'marker-end':''},svg);
+      txt(svg,(sx(r[0])+sx(r[1]))/2,yy-4,'racha de '+(r[1]-r[0]+1)+' '+(r[2]>0?'arriba':'abajo')+' de LC',{'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':10,fill:'#5B5D52'});});
+  }
+  // especificación
+  [[LES,'LES '+LES.toFixed(2),-4],[LEI,'LEI '+LEI.toFixed(2),12]].forEach(([v,l,dy])=>{el('line',{x1:P.l,x2:W-P.r,y1:sy(v),y2:sy(v),stroke:'#A8402F','stroke-width':2},svg);label(v,l,'#A8402F',dy);});
+  // control (del equipo)
+  const ux=num($('#kx').value),uu=num($('#kucl').value),ul=num($('#klcl').value);
+  if(isFinite(ux)&&ux>ymin&&ux<ymax){el('line',{x1:P.l,x2:W-P.r,y1:sy(ux),y2:sy(ux),stroke:'#21241F','stroke-width':1.6},svg);label(ux,'LC '+ux.toFixed(3),'#21241F');}
+  [[uu,'LSC '],[ul,'LIC ']].forEach(([v,l])=>{if(isFinite(v)&&v>ymin&&v<ymax){el('line',{x1:P.l,x2:W-P.r,y1:sy(v),y2:sy(v),stroke:'#2B5C6B','stroke-width':1.8,'stroke-dasharray':'6 4'},svg);label(v,l+v.toFixed(3),'#2B5C6B',l==='LSC '?12:-4);}});
+  // serie
+  let p='';D.forEach((v,i)=>{p+=(i?'L':'M')+sx(i+1)+','+sy(v);});
+  el('path',{d:p,fill:'none',stroke:'#0F74A8','stroke-width':1.5},svg);
+  D.forEach((v,i)=>{const n=i+1;const oc=OUTCTL.includes(n),os=OUTSPEC.includes(n);
+    const flag=showSig&&(oc||os);
+    const c=el('circle',{cx:sx(n),cy:sy(v),r:flag?6.5:4.5,fill:flag&&os?'#A8402F':'#0F74A8',stroke:flag?'#A8402F':'#FAF8F2','stroke-width':flag?2.5:1.5},svg);
+    el('title',{},c).textContent='Lote '+n+': '+v.toFixed(2)+' mm';
+    if(flag)txt(svg,sx(n),sy(v)-11,n,{'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#A8402F','font-weight':600});
+  });
+  // gráfico MR
+  const m=$('#mrchart');m.innerHTML='';const MH=170,MP={l:58,r:72,t:10,b:26};const mmax=0.12;
+  const my=v=>MH-MP.b-v/mmax*(MH-MP.t-MP.b);
+  const mg=el('g',{class:'grid'},m),ma=el('g',{class:'axis'},m);
+  [0,0.04,0.08,0.12].forEach(v=>{el('line',{x1:MP.l,x2:W-MP.r,y1:my(v),y2:my(v)},mg);txt(ma,MP.l-8,my(v)+4,v.toFixed(2),{'text-anchor':'end'});});
+  for(let i=1;i<=D.length;i++){if(i===1||i%5===0)txt(ma,sx(i),MH-MP.b+16,i,{'text-anchor':'middle'});}
+  el('line',{x1:MP.l,x2:W-MP.r,y1:MH-MP.b,y2:MH-MP.b,stroke:'#21241F'},m);el('line',{x1:MP.l,x2:MP.l,y1:MP.t,y2:MH-MP.b,stroke:'#21241F'},m);
+  const umr=num($('#kmr').value);
+  if(isFinite(umr)&&umr>0&&umr<mmax){el('line',{x1:MP.l,x2:W-MP.r,y1:my(umr),y2:my(umr),stroke:'#21241F','stroke-width':1.4},m);txt(m,W-MP.r+6,my(umr)+4,'MR̄ '+umr.toFixed(3),{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#21241F'});
+    const u=3.267*umr;if(u<mmax){el('line',{x1:MP.l,x2:W-MP.r,y1:my(u),y2:my(u),stroke:'#2B5C6B','stroke-width':1.6,'stroke-dasharray':'6 4'},m);txt(m,W-MP.r+6,my(u)+4,'LSC '+u.toFixed(3),{'font-family':'IBM Plex Mono, monospace','font-size':10.5,fill:'#2B5C6B'});}}
+  let mp='';MR.forEach((v,i)=>{if(v==null)return;mp+=(mp?'L':'M')+sx(i+1)+','+my(v);});
+  el('path',{d:mp,fill:'none',stroke:'#0F74A8','stroke-width':1.3},m);
+  MR.forEach((v,i)=>{if(v==null)return;const c=el('circle',{cx:sx(i+1),cy:my(v),r:3.5,fill:'#0F74A8'},m);el('title',{},c).textContent='MR lote '+(i+1)+': '+v.toFixed(2);});
+}
+
+/* ================= IMPRESIÓN / PDF ================= */
+function fitAreas(){$$('textarea').forEach(t=>{t.style.height='auto';t.style.height=(t.scrollHeight+4)+'px';});
+  const names=['m1','m2','m3','m4','m5','m6'].map(id=>$('#'+id).value.trim()).filter(Boolean);
+  $('#printStamp').textContent='Reporte generado el '+new Date().toLocaleString('es-MX')+' · Equipo: '+($('#team').value||'—')+' · Integrantes: '+(names.join(', ')||'—');}
+window.addEventListener('beforeprint',fitAreas);
+$('#printBtn').addEventListener('click',()=>{
+  const names=['m1','m2','m3','m4','m5','m6'].map(id=>$('#'+id).value.trim()).filter(Boolean);
+  if(!names.length&&!confirm('No han escrito el nombre de ningún integrante. ¿Generar el PDF de todos modos?')){$('#m1').focus();return;}
+  fitAreas();window.print();
+});
+$('#clearAll').addEventListener('click',()=>{if(!confirm('Esto borrará TODAS las respuestas de esta página en este navegador. ¿Continuar?'))return;
+  try{localStorage.removeItem(KEY);}catch(e){}location.reload();});
+
+/* ---- init ---- */
+$$('.seg [data-x]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.x===curX?'true':'false'));
+$('#calcVar').textContent=curX==='sem'?'Semana':'Humedad relativa';
+loadCalc();renderSums();drawScatter();drawControl();
+window.__S5={REG,XBAR,MRBAR,UCL,LCL,OUTCTL,OUTSPEC,TREND,RUNS};
+})();
+</script>
+</body>
+</html>
